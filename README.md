@@ -1,7 +1,7 @@
 # Cloud-Control
 Senior Capstone Project
 
-##Installing portaudio:
+## Installing portaudio:
 
     1. Download/compile tutorial here: http://portaudio.com/docs/v19-doxydocs/tutorial_start.html
 
