@@ -104,16 +104,10 @@ int main(int argc, char *argv[])
     // check to make sure that the user entered only the port number to run the server on
     if(argc == 2) {
 
-        PaStreamParameters  inputParameters, outputParameters;
+        PaStreamParameters  outputParameters;
         PaStream*           stream;
         PaError             err = paNoError;
         paTestData          data;
-        int                 i;
-        int                 totalFrames;
-        int                 numSamples;
-        int                 numBytes;
-        SAMPLE              max, val;
-        double              average;
 
         // extract the port number from the command line args and convert to an integer
         int serverPort = atoi(argv[1]);
@@ -143,16 +137,19 @@ int main(int argc, char *argv[])
             int connectionfd = accept(sockfd, (struct sockaddr *)&clientAddress, &clientAddressSize);
             printf("Connected by IP: %d, Port: %d\n", clientAddress.sin_addr.s_addr, clientAddress.sin_port);
 
-            // initialize strings for data from the client
-            char buffer[129];
-
             // block until data is received from the client
-            int receivedLength = recv(connectionfd, buffer, 129, 0);
+            int receivedLength = recv(connectionfd, data.recordedSamples, 22050, 0);
+            if(receivedLength == -1) {
+                fprintf(stderr, "Error: Received length = -1.\n");
+            }
 
             /* Playback recorded data.  -------------------------------------------- */
+            err = Pa_Initialize();
+
             data.frameIndex = 0;
 
             outputParameters.device = Pa_GetDefaultOutputDevice(); /* default output device */
+            printf("Device Count: %d\n", Pa_GetDeviceCount());
             if (outputParameters.device == paNoDevice) {
                 fprintf(stderr,"Error: No default output device.\n");
                 goto done;

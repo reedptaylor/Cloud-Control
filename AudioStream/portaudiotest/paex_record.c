@@ -301,6 +301,7 @@ int main(void)
     data.frameIndex = 0;
 
     outputParameters.device = Pa_GetDefaultOutputDevice(); /* default output device */
+    printf("Device Count: %d\n", Pa_GetDeviceCount());
     if (outputParameters.device == paNoDevice) {
         fprintf(stderr,"Error: No default output device.\n");
         goto done;
