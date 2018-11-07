@@ -10,7 +10,7 @@
 /* #define SAMPLE_RATE  (17932) // Test failure to open with this value. */
 #define SAMPLE_RATE  (44100)
 #define FRAMES_PER_BUFFER (512)
-#define NUM_SECONDS     (5)
+#define NUM_SECONDS     (10)
 #define NUM_CHANNELS    (2)
 /* #define DITHER_FLAG     (paDitherOff) */
 #define DITHER_FLAG     (0) /**/
@@ -145,21 +145,22 @@ int main(int argc, char *argv[])
             numSamples = totalFrames * NUM_CHANNELS;
             numBytes = numSamples * sizeof(SAMPLE);
             data.recordedSamples = (SAMPLE *) malloc( numBytes ); /* From now on, recordedSamples is initialised. */
+            int rcvLength;
+            rcvLength = recv(connectionfd, &data.maxFrameIndex, 4, 0);
+            if(rcvLength == -1) {
+                fprintf(stderr, "Error: rcvLength = -1.\n");
+            }
             for(int i = 0; i < numSamples; i++) {
-                int rcvLength = recv(connectionfd, &data.recordedSamples[i], 4096, 0);
+                rcvLength = recv(connectionfd, &data.recordedSamples[i], 4, 0);
                 if(rcvLength == -1) {
                     fprintf(stderr, "Error: rcvLength = -1.\n");
                 }
-            }
-            for(int i = 0; i < 10; i++) {
-                printf("Sample: %f\n", data.recordedSamples[i]);
             }
 
             /* Playback recorded data.  -------------------------------------------- */
             err = Pa_Initialize();
 
             data.frameIndex = 0;
-            data.maxFrameIndex = 220500;
 
             outputParameters.device = Pa_GetDefaultOutputDevice(); /* default output device */
             if (outputParameters.device == paNoDevice) {

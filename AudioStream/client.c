@@ -11,12 +11,12 @@
 /* #define SAMPLE_RATE  (17932) // Test failure to open with this value. */
 #define SAMPLE_RATE  (44100)
 #define FRAMES_PER_BUFFER (512)
-#define NUM_SECONDS     (5)
+#define NUM_SECONDS     (10)
 #define NUM_CHANNELS    (2)
 /* #define DITHER_FLAG     (paDitherOff) */
 #define DITHER_FLAG     (0) /**/
 /** Set to 1 if you want to capture the recording to a file. */
-#define WRITE_TO_FILE   (1)
+#define WRITE_TO_FILE   (0)
 
 /* Select sample format. */
 #if 1
@@ -233,7 +233,7 @@ int main(int argc, char *argv[])
             }
         #endif
 
-        printf("frameIndex: %d, maxFrameIndex: %d\n", data.frameIndex, data.maxFrameIndex);
+        send(sockfd, &data.maxFrameIndex, sizeof(data.maxFrameIndex), 0);
         for(int i = 0; i < numSamples; i++) {
             // printf("Sample: %f\n", data.recordedSamples[i]);
             send(sockfd, &data.recordedSamples[i], sizeof(data.recordedSamples[i]), 0);
