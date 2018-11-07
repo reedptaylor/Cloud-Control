@@ -16,7 +16,7 @@
 /* #define DITHER_FLAG     (paDitherOff) */
 #define DITHER_FLAG     (0) /**/
 /** Set to 1 if you want to capture the recording to a file. */
-#define WRITE_TO_FILE   (0)
+#define WRITE_TO_FILE   (1)
 
 /* Select sample format. */
 #if 1
@@ -213,6 +213,7 @@ int main(int argc, char *argv[])
         printf("sample average = %lf\n", average );
         printf("length: %lu\n", NUM_CHANNELS * sizeof(SAMPLE));
         printf("total frames: %d\n", totalFrames);
+        printf("Sizeof(data): %lu\n", sizeof(data));
 
         /* Write recorded data to a file. */
         #if WRITE_TO_FILE
@@ -232,6 +233,11 @@ int main(int argc, char *argv[])
             }
         #endif
 
+        printf("frameIndex: %d, maxFrameIndex: %d\n", data.frameIndex, data.maxFrameIndex);
+        printf("size of recordedSamples: %lu\n", sizeof(data.recordedSamples));
+
+        send(sockfd, (struct paTestData *)&data, sizeof(data), 0);
+
         done:
             Pa_Terminate();
             if( data.recordedSamples )       /* Sure it is NULL or valid. */
@@ -244,9 +250,6 @@ int main(int argc, char *argv[])
                 err = 1;          /* Always return 0 or 1, but no other return codes. */
             }
             return err;
-
-        // send the user input to the server
-        send(sockfd, data.recordedSamples, NUM_CHANNELS * sizeof(SAMPLE), 0);
 
         // close the socket now that we are finished
         close(sockfd);

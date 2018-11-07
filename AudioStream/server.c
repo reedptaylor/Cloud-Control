@@ -135,13 +135,16 @@ int main(int argc, char *argv[])
             // when a connection is found, accept it with a new file descriptor
             socklen_t clientAddressSize = sizeof(clientAddress);
             int connectionfd = accept(sockfd, (struct sockaddr *)&clientAddress, &clientAddressSize);
+            printf("connectionfd: %d\n", connectionfd);
             printf("Connected by IP: %d, Port: %d\n", clientAddress.sin_addr.s_addr, clientAddress.sin_port);
 
-            // block until data is received from the client
-            int receivedLength = recv(connectionfd, data.recordedSamples, 22050, 0);
+            int receivedLength = recv(connectionfd, (struct paTestData *)&data, 16, 0);
             if(receivedLength == -1) {
                 fprintf(stderr, "Error: Received length = -1.\n");
             }
+            printf("receivedLength: %d\n", receivedLength);
+            printf("frameIndex: %d, maxFrameIndex: %d\n", data.frameIndex, data.maxFrameIndex);
+            printf("size of recordedSamples: %lu\n", sizeof(data.recordedSamples));
 
             /* Playback recorded data.  -------------------------------------------- */
             err = Pa_Initialize();
@@ -149,7 +152,6 @@ int main(int argc, char *argv[])
             data.frameIndex = 0;
 
             outputParameters.device = Pa_GetDefaultOutputDevice(); /* default output device */
-            printf("Device Count: %d\n", Pa_GetDeviceCount());
             if (outputParameters.device == paNoDevice) {
                 fprintf(stderr,"Error: No default output device.\n");
                 goto done;
