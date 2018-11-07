@@ -234,9 +234,10 @@ int main(int argc, char *argv[])
         #endif
 
         printf("frameIndex: %d, maxFrameIndex: %d\n", data.frameIndex, data.maxFrameIndex);
-        printf("size of recordedSamples: %lu\n", sizeof(data.recordedSamples));
-
-        send(sockfd, (struct paTestData *)&data, sizeof(data), 0);
+        for(int i = 0; i < numSamples; i++) {
+            // printf("Sample: %f\n", data.recordedSamples[i]);
+            send(sockfd, &data.recordedSamples[i], sizeof(data.recordedSamples[i]), 0);
+        }
 
         done:
             Pa_Terminate();

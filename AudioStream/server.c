@@ -108,6 +108,9 @@ int main(int argc, char *argv[])
         PaStream*           stream;
         PaError             err = paNoError;
         paTestData          data;
+        int                 totalFrames;
+        int                 numSamples;
+        int                 numBytes;
 
         // extract the port number from the command line args and convert to an integer
         int serverPort = atoi(argv[1]);
@@ -138,18 +141,25 @@ int main(int argc, char *argv[])
             printf("connectionfd: %d\n", connectionfd);
             printf("Connected by IP: %d, Port: %d\n", clientAddress.sin_addr.s_addr, clientAddress.sin_port);
 
-            int receivedLength = recv(connectionfd, (struct paTestData *)&data, 16, 0);
-            if(receivedLength == -1) {
-                fprintf(stderr, "Error: Received length = -1.\n");
+            totalFrames = NUM_SECONDS * SAMPLE_RATE;
+            numSamples = totalFrames * NUM_CHANNELS;
+            numBytes = numSamples * sizeof(SAMPLE);
+            data.recordedSamples = (SAMPLE *) malloc( numBytes ); /* From now on, recordedSamples is initialised. */
+            for(int i = 0; i < numSamples; i++) {
+                int rcvLength = recv(connectionfd, &data.recordedSamples[i], 4096, 0);
+                if(rcvLength == -1) {
+                    fprintf(stderr, "Error: rcvLength = -1.\n");
+                }
             }
-            printf("receivedLength: %d\n", receivedLength);
-            printf("frameIndex: %d, maxFrameIndex: %d\n", data.frameIndex, data.maxFrameIndex);
-            printf("size of recordedSamples: %lu\n", sizeof(data.recordedSamples));
+            for(int i = 0; i < 10; i++) {
+                printf("Sample: %f\n", data.recordedSamples[i]);
+            }
 
             /* Playback recorded data.  -------------------------------------------- */
             err = Pa_Initialize();
 
             data.frameIndex = 0;
+            data.maxFrameIndex = 220500;
 
             outputParameters.device = Pa_GetDefaultOutputDevice(); /* default output device */
             if (outputParameters.device == paNoDevice) {
