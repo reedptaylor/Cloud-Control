@@ -1686,6 +1686,129 @@ This footprint was designed to help hold the alignment of a through-hole compone
 </deviceset>
 </devicesets>
 </library>
+<library name="SGTL5000XNLA3R2">
+<packages>
+<package name="QFN40P300X300X60-21N">
+<wire x1="-1.5" y1="1.5" x2="1.5" y2="1.5" width="0.127" layer="51"/>
+<wire x1="1.5" y1="1.5" x2="1.5" y2="-1.5" width="0.127" layer="51"/>
+<wire x1="1.5" y1="-1.5" x2="-1.5" y2="-1.5" width="0.127" layer="51"/>
+<wire x1="-1.5" y1="-1.5" x2="-1.5" y2="1.5" width="0.127" layer="51"/>
+<circle x="-1.8" y="1.2" radius="0.0509875" width="0.127" layer="21"/>
+<wire x1="-2.105" y1="2.105" x2="2.105" y2="2.105" width="0.05" layer="39"/>
+<wire x1="2.105" y1="2.105" x2="2.105" y2="-2.105" width="0.05" layer="39"/>
+<wire x1="2.105" y1="-2.105" x2="-2.105" y2="-2.105" width="0.05" layer="39"/>
+<wire x1="-2.105" y1="-2.105" x2="-2.105" y2="2.105" width="0.05" layer="39"/>
+<text x="-2.10163125" y="2.201709375" size="0.81343125" layer="25"> &gt;NAME</text>
+<text x="-2.10263125" y="-3.003759375" size="0.81381875" layer="27"> &gt;VALUE</text>
+<wire x1="-1.5" y1="1.25" x2="-1.5" y2="1.5" width="0.127" layer="21"/>
+<wire x1="1.5" y1="1.5" x2="1.5" y2="1.25" width="0.127" layer="21"/>
+<wire x1="-1.5" y1="1.5" x2="-1.25" y2="1.5" width="0.127" layer="21"/>
+<wire x1="1.5" y1="1.5" x2="1.25" y2="1.5" width="0.127" layer="21"/>
+<wire x1="-1.5" y1="-1.25" x2="-1.5" y2="-1.5" width="0.127" layer="21"/>
+<wire x1="-1.5" y1="-1.5" x2="-1.25" y2="-1.5" width="0.127" layer="21"/>
+<wire x1="1.5" y1="-1.25" x2="1.5" y2="-1.5" width="0.127" layer="21"/>
+<wire x1="1.5" y1="-1.5" x2="1.25" y2="-1.5" width="0.127" layer="21"/>
+<rectangle x1="-0.53783125" y1="-0.53783125" x2="0.5376" y2="0.5376" layer="31"/>
+<smd name="1" x="-1.405" y="0.8" dx="0.22" dy="0.71" layer="1" rot="R270"/>
+<smd name="2" x="-1.405" y="0.4" dx="0.22" dy="0.71" layer="1" rot="R270"/>
+<smd name="3" x="-1.405" y="0" dx="0.22" dy="0.71" layer="1" rot="R270"/>
+<smd name="4" x="-1.405" y="-0.4" dx="0.22" dy="0.71" layer="1" rot="R270"/>
+<smd name="5" x="-1.405" y="-0.8" dx="0.22" dy="0.71" layer="1" rot="R270"/>
+<smd name="6" x="-0.8" y="-1.405" dx="0.22" dy="0.71" layer="1"/>
+<smd name="7" x="-0.4" y="-1.405" dx="0.22" dy="0.71" layer="1"/>
+<smd name="8" x="0" y="-1.405" dx="0.22" dy="0.71" layer="1"/>
+<smd name="9" x="0.4" y="-1.405" dx="0.22" dy="0.71" layer="1"/>
+<smd name="10" x="0.8" y="-1.405" dx="0.22" dy="0.71" layer="1"/>
+<smd name="11" x="1.405" y="-0.8" dx="0.22" dy="0.71" layer="1" rot="R90"/>
+<smd name="12" x="1.405" y="-0.4" dx="0.22" dy="0.71" layer="1" rot="R90"/>
+<smd name="13" x="1.405" y="0" dx="0.22" dy="0.71" layer="1" rot="R90"/>
+<smd name="14" x="1.405" y="0.4" dx="0.22" dy="0.71" layer="1" rot="R90"/>
+<smd name="15" x="1.405" y="0.8" dx="0.22" dy="0.71" layer="1" rot="R90"/>
+<smd name="16" x="0.8" y="1.405" dx="0.22" dy="0.71" layer="1" rot="R180"/>
+<smd name="17" x="0.4" y="1.405" dx="0.22" dy="0.71" layer="1" rot="R180"/>
+<smd name="18" x="0" y="1.405" dx="0.22" dy="0.71" layer="1" rot="R180"/>
+<smd name="19" x="-0.4" y="1.405" dx="0.22" dy="0.71" layer="1" rot="R180"/>
+<smd name="20" x="-0.8" y="1.405" dx="0.22" dy="0.71" layer="1" rot="R180"/>
+<smd name="21" x="0" y="0" dx="1.7" dy="1.7" layer="1" cream="no"/>
+</package>
+</packages>
+<symbols>
+<symbol name="SGTL5000XNLA3R2">
+<text x="-15.2427" y="20.3235" size="1.778309375" layer="95">&gt;NAME</text>
+<text x="-15.2406" y="-22.8609" size="1.77806875" layer="96">&gt;VALUE</text>
+<wire x1="-15.24" y1="20.32" x2="-15.24" y2="-20.32" width="0.254" layer="94"/>
+<wire x1="-15.24" y1="-20.32" x2="15.24" y2="-20.32" width="0.254" layer="94"/>
+<wire x1="15.24" y1="-20.32" x2="15.24" y2="20.32" width="0.254" layer="94"/>
+<wire x1="15.24" y1="20.32" x2="-15.24" y2="20.32" width="0.254" layer="94"/>
+<pin name="CPFILT" x="-20.32" y="-17.78" length="middle" direction="pas"/>
+<pin name="VDDIO" x="20.32" y="12.7" length="middle" direction="pwr" rot="R180"/>
+<pin name="SYS_MCLK" x="-20.32" y="17.78" length="middle" direction="in" function="clk"/>
+<pin name="I2S_LRCLK" x="-20.32" y="5.08" length="middle" function="clk"/>
+<pin name="I2S_SCLK" x="-20.32" y="7.62" length="middle" function="clk"/>
+<pin name="I2S_DOUT" x="20.32" y="5.08" length="middle" direction="out" rot="R180"/>
+<pin name="I2S_DIN" x="-20.32" y="2.54" length="middle" direction="in"/>
+<pin name="CTRL_DATA" x="-20.32" y="12.7" length="middle"/>
+<pin name="CTRL_CLK" x="-20.32" y="15.24" length="middle" function="clk"/>
+<pin name="VDDD" x="20.32" y="15.24" length="middle" direction="pwr" rot="R180"/>
+<pin name="HP_R" x="20.32" y="-7.62" length="middle" direction="out" rot="R180"/>
+<pin name="HP_VGND" x="20.32" y="-15.24" length="middle" direction="pwr" rot="R180"/>
+<pin name="VDDA" x="20.32" y="17.78" length="middle" direction="pwr" rot="R180"/>
+<pin name="HP_L" x="20.32" y="-10.16" length="middle" direction="out" rot="R180"/>
+<pin name="VAG" x="-20.32" y="-15.24" length="middle" direction="pas"/>
+<pin name="LINEOUT_R" x="20.32" y="-2.54" length="middle" direction="out" rot="R180"/>
+<pin name="LINEOUT_L" x="20.32" y="-5.08" length="middle" direction="out" rot="R180"/>
+<pin name="LINEIN_R" x="-20.32" y="-2.54" length="middle" direction="in"/>
+<pin name="LINEIN_L" x="-20.32" y="-5.08" length="middle" direction="in"/>
+<pin name="MIC" x="-20.32" y="-7.62" length="middle" direction="in"/>
+<pin name="GND" x="20.32" y="-17.78" length="middle" direction="pwr" rot="R180"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="SGTL5000XNLA3R2" prefix="U">
+<description>Audio Codec , Ultra Low-Power, 4 mw for DAC-to-HP, 98 dB SNR and -80 dB THD+N, QFN 20, Reel</description>
+<gates>
+<gate name="G$1" symbol="SGTL5000XNLA3R2" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="QFN40P300X300X60-21N">
+<connects>
+<connect gate="G$1" pin="CPFILT" pad="11"/>
+<connect gate="G$1" pin="CTRL_CLK" pad="19"/>
+<connect gate="G$1" pin="CTRL_DATA" pad="18"/>
+<connect gate="G$1" pin="GND" pad="21"/>
+<connect gate="G$1" pin="HP_L" pad="4"/>
+<connect gate="G$1" pin="HP_R" pad="1"/>
+<connect gate="G$1" pin="HP_VGND" pad="2"/>
+<connect gate="G$1" pin="I2S_DIN" pad="17"/>
+<connect gate="G$1" pin="I2S_DOUT" pad="16"/>
+<connect gate="G$1" pin="I2S_LRCLK" pad="14"/>
+<connect gate="G$1" pin="I2S_SCLK" pad="15"/>
+<connect gate="G$1" pin="LINEIN_L" pad="9"/>
+<connect gate="G$1" pin="LINEIN_R" pad="8"/>
+<connect gate="G$1" pin="LINEOUT_L" pad="7"/>
+<connect gate="G$1" pin="LINEOUT_R" pad="6"/>
+<connect gate="G$1" pin="MIC" pad="10"/>
+<connect gate="G$1" pin="SYS_MCLK" pad="13"/>
+<connect gate="G$1" pin="VAG" pad="5"/>
+<connect gate="G$1" pin="VDDA" pad="3"/>
+<connect gate="G$1" pin="VDDD" pad="20"/>
+<connect gate="G$1" pin="VDDIO" pad="12"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="AVAILABILITY" value="Unavailable"/>
+<attribute name="DESCRIPTION" value=" Audio Codec , Ultra Low-Power, 4 mw for DAC-to-HP, 98 dB SNR and -80 dB THD+N, QFN 32, Reel "/>
+<attribute name="MF" value="NXP USA"/>
+<attribute name="MP" value="SGTL5000XNLA3R2"/>
+<attribute name="PACKAGE" value="QFN-20 Freescale Semiconductor"/>
+<attribute name="PRICE" value="None"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -1700,6 +1823,7 @@ This footprint was designed to help hold the alignment of a through-hole compone
 <part name="J2" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_07" device="" package3d_urn="urn:adsk.eagle:package:38129/1"/>
 <part name="GND1" library="Homework1" deviceset="GND" device=""/>
 <part name="SUPPLY1" library="Homework1" deviceset="3.3V" device=""/>
+<part name="U2" library="SGTL5000XNLA3R2" deviceset="SGTL5000XNLA3R2" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -1719,6 +1843,10 @@ This footprint was designed to help hold the alignment of a through-hole compone
 </instance>
 <instance part="SUPPLY1" gate="G$1" x="93.98" y="-88.9" smashed="yes">
 <attribute name="VALUE" x="93.98" y="-86.106" size="1.778" layer="96" align="bottom-center"/>
+</instance>
+<instance part="U2" gate="G$1" x="-104.14" y="96.52" smashed="yes">
+<attribute name="NAME" x="-119.3827" y="116.8435" size="1.778309375" layer="95"/>
+<attribute name="VALUE" x="-119.3806" y="73.6591" size="1.77806875" layer="96"/>
 </instance>
 </instances>
 <busses>
@@ -1776,13 +1904,23 @@ This footprint was designed to help hold the alignment of a through-hole compone
 <net name="N$6" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="P0[0]"/>
-<wire x1="-5.08" y1="99.06" x2="-12.7" y2="99.06" width="0.1524" layer="91"/>
+<wire x1="-5.08" y1="99.06" x2="-15.24" y2="99.06" width="0.1524" layer="91"/>
+<wire x1="-15.24" y1="99.06" x2="-15.24" y2="127" width="0.1524" layer="91"/>
+<wire x1="-15.24" y1="127" x2="-129.54" y2="127" width="0.1524" layer="91"/>
+<wire x1="-129.54" y1="127" x2="-129.54" y2="109.22" width="0.1524" layer="91"/>
+<pinref part="U2" gate="G$1" pin="CTRL_DATA"/>
+<wire x1="-129.54" y1="109.22" x2="-124.46" y2="109.22" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$7" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="P0[1]"/>
-<wire x1="-5.08" y1="96.52" x2="-12.7" y2="96.52" width="0.1524" layer="91"/>
+<wire x1="-5.08" y1="96.52" x2="-17.78" y2="96.52" width="0.1524" layer="91"/>
+<wire x1="-17.78" y1="96.52" x2="-17.78" y2="124.46" width="0.1524" layer="91"/>
+<wire x1="-17.78" y1="124.46" x2="-127" y2="124.46" width="0.1524" layer="91"/>
+<wire x1="-127" y1="124.46" x2="-127" y2="111.76" width="0.1524" layer="91"/>
+<pinref part="U2" gate="G$1" pin="CTRL_CLK"/>
+<wire x1="-127" y1="111.76" x2="-124.46" y2="111.76" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="GND" class="0">
