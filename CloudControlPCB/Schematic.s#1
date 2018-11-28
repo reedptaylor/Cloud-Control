@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.2.1">
+<eagle version="9.2.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="mm" unit="mm" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -1809,6 +1809,35 @@ Commonly used for small ceramic capacitors. Like our 0.1uF (http://www.sparkfun.
 <vertex x="1.8364" y="-0.0051" curve="-90.012967"/>
 </polygon>
 </package>
+<package name="0805" urn="urn:adsk.eagle:footprint:37400/1">
+<description>&lt;p&gt;&lt;b&gt;Generic 2012 (0805) package&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;0.2mm courtyard excess rounded to nearest 0.05mm.&lt;/p&gt;</description>
+<smd name="1" x="-0.9" y="0" dx="0.8" dy="1.2" layer="1"/>
+<smd name="2" x="0.9" y="0" dx="0.8" dy="1.2" layer="1"/>
+<text x="0" y="0.889" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center">&gt;NAME</text>
+<text x="0" y="-0.889" size="0.6096" layer="27" font="vector" ratio="20" align="top-center">&gt;VALUE</text>
+<wire x1="-1.5" y1="0.8" x2="1.5" y2="0.8" width="0.0508" layer="39"/>
+<wire x1="1.5" y1="0.8" x2="1.5" y2="-0.8" width="0.0508" layer="39"/>
+<wire x1="1.5" y1="-0.8" x2="-1.5" y2="-0.8" width="0.0508" layer="39"/>
+<wire x1="-1.5" y1="-0.8" x2="-1.5" y2="0.8" width="0.0508" layer="39"/>
+</package>
+<package name="1206" urn="urn:adsk.eagle:footprint:37399/1">
+<description>&lt;p&gt;&lt;b&gt;Generic 3216 (1206) package&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;0.2mm courtyard excess rounded to nearest 0.05mm.&lt;/p&gt;</description>
+<wire x1="-2.4" y1="1.1" x2="2.4" y2="1.1" width="0.0508" layer="39"/>
+<wire x1="2.4" y1="-1.1" x2="-2.4" y2="-1.1" width="0.0508" layer="39"/>
+<wire x1="-2.4" y1="-1.1" x2="-2.4" y2="1.1" width="0.0508" layer="39"/>
+<wire x1="2.4" y1="1.1" x2="2.4" y2="-1.1" width="0.0508" layer="39"/>
+<wire x1="-0.965" y1="0.787" x2="0.965" y2="0.787" width="0.1016" layer="51"/>
+<wire x1="-0.965" y1="-0.787" x2="0.965" y2="-0.787" width="0.1016" layer="51"/>
+<smd name="1" x="-1.4" y="0" dx="1.6" dy="1.8" layer="1"/>
+<smd name="2" x="1.4" y="0" dx="1.6" dy="1.8" layer="1"/>
+<text x="0" y="1.143" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center">&gt;NAME</text>
+<text x="0" y="-1.143" size="0.6096" layer="27" font="vector" ratio="20" align="top-center">&gt;VALUE</text>
+<rectangle x1="-1.7018" y1="-0.8509" x2="-0.9517" y2="0.8491" layer="51"/>
+<rectangle x1="0.9517" y1="-0.8491" x2="1.7018" y2="0.8509" layer="51"/>
+<rectangle x1="-0.1999" y1="-0.4001" x2="0.1999" y2="0.4001" layer="35"/>
+</package>
 </packages>
 <packages3d>
 <package3d name="0603" urn="urn:adsk.eagle:package:39650/1" type="box">
@@ -1839,6 +1868,20 @@ Commonly used for small ceramic capacitors. Like our 0.1uF (http://www.sparkfun.
 Warning: This is the KIT version of this package. This package has a smaller diameter top stop mask, which doesn't cover the diameter of the pad. This means only the bottom side of the pads' copper will be exposed. You'll only be able to solder to the bottom side.</description>
 <packageinstances>
 <packageinstance name="CAP-PTH-SMALL-KIT"/>
+</packageinstances>
+</package3d>
+<package3d name="0805" urn="urn:adsk.eagle:package:37429/1" type="box">
+<description>Generic 2012 (0805) package
+0.2mm courtyard excess rounded to nearest 0.05mm.</description>
+<packageinstances>
+<packageinstance name="0805"/>
+</packageinstances>
+</package3d>
+<package3d name="1206" urn="urn:adsk.eagle:package:37426/1" type="box">
+<description>Generic 3216 (1206) package
+0.2mm courtyard excess rounded to nearest 0.05mm.</description>
+<packageinstances>
+<packageinstance name="1206"/>
 </packageinstances>
 </package3d>
 </packages3d>
@@ -1872,6 +1915,16 @@ Warning: This is the KIT version of this package. This package has a smaller dia
 <pin name="1" x="-5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1"/>
 </symbol>
 <symbol name="CAP-2">
+<wire x1="0" y1="2.54" x2="0" y2="2.032" width="0.1524" layer="94"/>
+<wire x1="0" y1="0" x2="0" y2="0.508" width="0.1524" layer="94"/>
+<text x="1.524" y="2.921" size="1.778" layer="95" font="vector">&gt;NAME</text>
+<text x="1.524" y="-2.159" size="1.778" layer="96" font="vector">&gt;VALUE</text>
+<rectangle x1="-2.032" y1="0.508" x2="2.032" y2="1.016" layer="94"/>
+<rectangle x1="-2.032" y1="1.524" x2="2.032" y2="2.032" layer="94"/>
+<pin name="1" x="0" y="5.08" visible="off" length="short" direction="pas" swaplevel="1" rot="R270"/>
+<pin name="2" x="0" y="-2.54" visible="off" length="short" direction="pas" swaplevel="1" rot="R90"/>
+</symbol>
+<symbol name="CAP">
 <wire x1="0" y1="2.54" x2="0" y2="2.032" width="0.1524" layer="94"/>
 <wire x1="0" y1="0" x2="0" y2="0.508" width="0.1524" layer="94"/>
 <text x="1.524" y="2.921" size="1.778" layer="95" font="vector">&gt;NAME</text>
@@ -2014,6 +2067,90 @@ Warning: This is the KIT version of this package. This package has a smaller dia
 <technology name="">
 <attribute name="PROD_ID" value="CAP-08390"/>
 <attribute name="VALUE" value="0.1uF"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="1.0UF" prefix="C">
+<description>&lt;h3&gt;1µF ceramic capacitors&lt;/h3&gt;
+&lt;p&gt;A capacitor is a passive two-terminal electrical component used to store electrical energy temporarily in an electric field.&lt;/p&gt;</description>
+<gates>
+<gate name="G$1" symbol="CAP" x="0" y="0"/>
+</gates>
+<devices>
+<device name="-0603-16V-10%" package="0603">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:37414/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="CAP-00868"/>
+<attribute name="VALUE" value="1.0uF"/>
+</technology>
+</technologies>
+</device>
+<device name="-0402-16V-10%" package="0402">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:37413/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="CAP-12417"/>
+<attribute name="VALUE" value="1.0uF"/>
+</technology>
+</technologies>
+</device>
+<device name="-0805-25V-(+80/-20%)" package="0805">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:37429/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="CAP-11625"/>
+<attribute name="VALUE" value="1.0uF"/>
+</technology>
+</technologies>
+</device>
+<device name="-1206-50V-10%" package="1206">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:37426/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="CAP-09822"/>
+<attribute name="VALUE" value="1.0uF"/>
+</technology>
+</technologies>
+</device>
+<device name="-0805-25V-10%" package="0805">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:37429/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="CAP-08064"/>
+<attribute name="VALUE" value="1.0uF"/>
 </technology>
 </technologies>
 </device>
@@ -2551,6 +2688,48 @@ Lectureship dozent-rb: &amp;nbsp;&lt;a href="http://www.dozent-rb.de/" target="_
 </deviceset>
 </devicesets>
 </library>
+<library name="SparkFun-PowerSymbols" urn="urn:adsk.eagle:library:530">
+<description>&lt;h3&gt;SparkFun Power Symbols&lt;/h3&gt;
+This library contains power, ground, and voltage-supply symbols.
+&lt;br&gt;
+&lt;br&gt;
+We've spent an enormous amount of time creating and checking these footprints and parts, but it is &lt;b&gt; the end user's responsibility&lt;/b&gt; to ensure correctness and suitablity for a given componet or application. 
+&lt;br&gt;
+&lt;br&gt;If you enjoy using this library, please buy one of our products at &lt;a href=" www.sparkfun.com"&gt;SparkFun.com&lt;/a&gt;.
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Licensing:&lt;/b&gt; Creative Commons ShareAlike 4.0 International - https://creativecommons.org/licenses/by-sa/4.0/ 
+&lt;br&gt;
+&lt;br&gt;
+You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
+<packages>
+</packages>
+<symbols>
+<symbol name="1.8V" urn="urn:adsk.eagle:symbol:39409/1" library_version="1">
+<description>&lt;h3&gt;1.8V Voltage Supply&lt;/h3&gt;</description>
+<wire x1="0.762" y1="1.27" x2="0" y2="2.54" width="0.254" layer="94"/>
+<wire x1="0" y1="2.54" x2="-0.762" y2="1.27" width="0.254" layer="94"/>
+<pin name="1.8V" x="0" y="0" visible="off" length="short" direction="sup" rot="R90"/>
+<text x="0" y="2.794" size="1.778" layer="96" align="bottom-center">&gt;VALUE</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="1.8V" urn="urn:adsk.eagle:component:39440/1" prefix="SUPPLY" library_version="1">
+<description>&lt;h3&gt;1.8V Supply Symbol&lt;/h3&gt;
+&lt;p&gt;Power supply symbol for a specifically-stated 1.8V source.&lt;/p&gt;</description>
+<gates>
+<gate name="G$1" symbol="1.8V" x="0" y="0"/>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -2584,6 +2763,20 @@ Lectureship dozent-rb: &amp;nbsp;&lt;a href="http://www.dozent-rb.de/" target="_
 <part name="GND7" library="Homework1" deviceset="GND" device=""/>
 <part name="SUPPLY6" library="Homework1" deviceset="3.3V" device=""/>
 <part name="C3" library="Homework1" deviceset="0.1UF" device="-0603-25V-(+80/-20%)" package3d_urn="urn:adsk.eagle:package:37414/1" value="0.1uF"/>
+<part name="C4" library="Homework1" deviceset="0.1UF" device="-0402-16V-10%" package3d_urn="urn:adsk.eagle:package:37413/1" value="0.1uF"/>
+<part name="C5" library="Homework1" deviceset="0.1UF" device="-0402-16V-10%" package3d_urn="urn:adsk.eagle:package:37413/1" value="0.1uF"/>
+<part name="C6" library="Homework1" deviceset="0.1UF" device="-0402-16V-10%" package3d_urn="urn:adsk.eagle:package:37413/1" value="0.1uF"/>
+<part name="GND2" library="Homework1" deviceset="GND" device=""/>
+<part name="GND5" library="Homework1" deviceset="GND" device=""/>
+<part name="GND8" library="Homework1" deviceset="GND" device=""/>
+<part name="SUPPLY2" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="1.8V" device=""/>
+<part name="SUPPLY7" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="1.8V" device=""/>
+<part name="SUPPLY8" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="1.8V" device=""/>
+<part name="GND9" library="Homework1" deviceset="GND" device=""/>
+<part name="GND10" library="Homework1" deviceset="GND" device=""/>
+<part name="C7" library="Homework1" deviceset="1.0UF" device="-0402-16V-10%" package3d_urn="urn:adsk.eagle:package:37413/1" value="1.0uF"/>
+<part name="C8" library="Homework1" deviceset="1.0UF" device="-0402-16V-10%" package3d_urn="urn:adsk.eagle:package:37413/1" value="1.0uF"/>
+<part name="C9" library="Homework1" deviceset="0.1UF" device="-0402-16V-10%" package3d_urn="urn:adsk.eagle:package:37413/1" value="0.1uF"/>
 </parts>
 <sheets>
 <sheet>
@@ -2594,87 +2787,135 @@ Lectureship dozent-rb: &amp;nbsp;&lt;a href="http://www.dozent-rb.de/" target="_
 <text x="-154.94" y="78.74" size="1.778" layer="97">GROUND</text>
 </plain>
 <instances>
-<instance part="U1" gate="G$1" x="73.66" y="35.56" smashed="yes">
+<instance part="U1" gate="G$1" x="73.66" y="35.56">
 <attribute name="NAME" x="-5.08" y="111.76" size="1.778" layer="95" font="vector"/>
 <attribute name="VALUE" x="142.24" y="111.76" size="1.778" layer="96" font="vector"/>
 </instance>
-<instance part="J2" gate="G$1" x="-68.58" y="30.48" smashed="yes">
+<instance part="J2" gate="G$1" x="-68.58" y="30.48">
 <attribute name="VALUE" x="-73.66" y="20.574" size="1.778" layer="96" font="vector"/>
 <attribute name="NAME" x="-76.2" y="46.228" size="1.778" layer="95" font="vector"/>
 </instance>
-<instance part="GND1" gate="1" x="91.44" y="-68.58" smashed="yes">
+<instance part="GND1" gate="1" x="91.44" y="-68.58">
 <attribute name="VALUE" x="91.44" y="-68.834" size="1.778" layer="96" align="top-center"/>
 </instance>
-<instance part="SUPPLY1" gate="G$1" x="93.98" y="-88.9" smashed="yes">
+<instance part="SUPPLY1" gate="G$1" x="93.98" y="-88.9">
 <attribute name="VALUE" x="93.98" y="-86.106" size="1.778" layer="96" align="bottom-center"/>
 </instance>
-<instance part="U2" gate="G$1" x="-104.14" y="96.52" smashed="yes">
+<instance part="U2" gate="G$1" x="-104.14" y="96.52">
 <attribute name="NAME" x="-119.3827" y="116.8435" size="1.778309375" layer="95"/>
 <attribute name="VALUE" x="-119.3806" y="73.6591" size="1.77806875" layer="96"/>
 </instance>
-<instance part="J1" gate="G$1" x="-154.94" y="73.66" smashed="yes">
+<instance part="J1" gate="G$1" x="-154.94" y="73.66">
 <attribute name="NAME" x="-160.02" y="79.248" size="1.778" layer="95" font="vector"/>
 <attribute name="VALUE" x="-160.02" y="66.04" size="1.778" layer="96" font="vector"/>
 </instance>
-<instance part="C1" gate="G$1" x="96.52" y="-76.2" smashed="yes">
+<instance part="C1" gate="G$1" x="96.52" y="-76.2">
 <attribute name="NAME" x="98.044" y="-73.279" size="1.778" layer="95" font="vector"/>
 <attribute name="VALUE" x="98.044" y="-78.359" size="1.778" layer="96" font="vector"/>
 </instance>
-<instance part="GND3" gate="1" x="104.14" y="-83.82" smashed="yes">
+<instance part="GND3" gate="1" x="104.14" y="-83.82">
 <attribute name="VALUE" x="104.14" y="-84.074" size="1.778" layer="96" align="top-center"/>
 </instance>
-<instance part="SUPPLY3" gate="G$1" x="104.14" y="-71.12" smashed="yes">
+<instance part="SUPPLY3" gate="G$1" x="104.14" y="-71.12">
 <attribute name="VALUE" x="104.14" y="-68.326" size="1.778" layer="96" align="bottom-center"/>
 </instance>
-<instance part="C2" gate="G$1" x="71.12" y="-76.2" smashed="yes">
+<instance part="C2" gate="G$1" x="71.12" y="-76.2">
 <attribute name="NAME" x="72.644" y="-73.279" size="1.778" layer="95" font="vector"/>
 <attribute name="VALUE" x="72.644" y="-78.359" size="1.778" layer="96" font="vector"/>
 </instance>
-<instance part="GND4" gate="1" x="63.5" y="-81.28" smashed="yes">
+<instance part="GND4" gate="1" x="63.5" y="-81.28">
 <attribute name="VALUE" x="63.5" y="-81.534" size="1.778" layer="96" align="top-center"/>
 </instance>
-<instance part="SUPPLY4" gate="G$1" x="63.5" y="-71.12" smashed="yes">
+<instance part="SUPPLY4" gate="G$1" x="63.5" y="-71.12">
 <attribute name="VALUE" x="63.5" y="-68.326" size="1.778" layer="96" align="bottom-center"/>
 </instance>
-<instance part="X1" gate="G$1" x="17.78" y="-66.04" smashed="yes" rot="MR0">
+<instance part="X1" gate="G$1" x="17.78" y="-66.04" rot="MR0">
 <attribute name="VALUE" x="21.59" y="-74.676" size="1.6764" layer="96" rot="MR0"/>
 <attribute name="NAME" x="21.59" y="-59.182" size="1.6764" layer="95" ratio="12" rot="MR0"/>
 </instance>
-<instance part="R1" gate="G$1" x="20.32" y="-86.36" smashed="yes" rot="R90">
+<instance part="R1" gate="G$1" x="20.32" y="-86.36" rot="R90">
 <attribute name="NAME" x="18.796" y="-86.36" size="1.778" layer="95" font="vector" rot="R90" align="bottom-center"/>
 <attribute name="VALUE" x="21.844" y="-86.36" size="1.778" layer="96" font="vector" rot="R90" align="top-center"/>
 </instance>
-<instance part="R2" gate="G$1" x="27.94" y="-86.36" smashed="yes" rot="R90">
+<instance part="R2" gate="G$1" x="27.94" y="-86.36" rot="R90">
 <attribute name="NAME" x="26.416" y="-86.36" size="1.778" layer="95" font="vector" rot="R90" align="bottom-center"/>
 <attribute name="VALUE" x="29.464" y="-86.36" size="1.778" layer="96" font="vector" rot="R90" align="top-center"/>
 </instance>
-<instance part="R3" gate="G$1" x="35.56" y="-86.36" smashed="yes" rot="R90">
+<instance part="R3" gate="G$1" x="35.56" y="-86.36" rot="R90">
 <attribute name="NAME" x="34.036" y="-86.36" size="1.778" layer="95" font="vector" rot="R90" align="bottom-center"/>
 <attribute name="VALUE" x="37.084" y="-86.36" size="1.778" layer="96" font="vector" rot="R90" align="top-center"/>
 </instance>
-<instance part="R4" gate="G$1" x="43.18" y="-86.36" smashed="yes" rot="R90">
+<instance part="R4" gate="G$1" x="43.18" y="-86.36" rot="R90">
 <attribute name="NAME" x="41.656" y="-86.36" size="1.778" layer="95" font="vector" rot="R90" align="bottom-center"/>
 <attribute name="VALUE" x="44.704" y="-86.36" size="1.778" layer="96" font="vector" rot="R90" align="top-center"/>
 </instance>
-<instance part="R5" gate="G$1" x="12.7" y="-86.36" smashed="yes" rot="R90">
+<instance part="R5" gate="G$1" x="12.7" y="-86.36" rot="R90">
 <attribute name="NAME" x="11.176" y="-86.36" size="1.778" layer="95" font="vector" rot="R90" align="bottom-center"/>
 <attribute name="VALUE" x="14.224" y="-86.36" size="1.778" layer="96" font="vector" rot="R90" align="top-center"/>
 </instance>
-<instance part="SUPPLY5" gate="G$1" x="2.54" y="-91.44" smashed="yes">
+<instance part="SUPPLY5" gate="G$1" x="2.54" y="-91.44">
 <attribute name="VALUE" x="2.54" y="-88.646" size="1.778" layer="96" align="bottom-center"/>
 </instance>
-<instance part="GND6" gate="1" x="50.8" y="-93.98" smashed="yes">
+<instance part="GND6" gate="1" x="50.8" y="-93.98">
 <attribute name="VALUE" x="50.8" y="-94.234" size="1.778" layer="96" align="top-center"/>
 </instance>
-<instance part="GND7" gate="1" x="-60.96" y="10.16" smashed="yes">
+<instance part="GND7" gate="1" x="-60.96" y="10.16">
 <attribute name="VALUE" x="-60.96" y="9.906" size="1.778" layer="96" align="top-center"/>
 </instance>
-<instance part="SUPPLY6" gate="G$1" x="-48.26" y="10.16" smashed="yes" rot="R180">
+<instance part="SUPPLY6" gate="G$1" x="-48.26" y="10.16" rot="R180">
 <attribute name="VALUE" x="-48.26" y="7.366" size="1.778" layer="96" rot="R180" align="bottom-center"/>
 </instance>
-<instance part="C3" gate="G$1" x="-55.88" y="17.78" smashed="yes" rot="R270">
+<instance part="C3" gate="G$1" x="-55.88" y="17.78" rot="R270">
 <attribute name="NAME" x="-52.959" y="16.256" size="1.778" layer="95" font="vector" rot="R270"/>
 <attribute name="VALUE" x="-58.039" y="16.256" size="1.778" layer="96" font="vector" rot="R270"/>
+</instance>
+<instance part="C4" gate="G$1" x="-61.4" y="111.2">
+<attribute name="NAME" x="-59.876" y="114.121" size="1.778" layer="95" font="vector"/>
+<attribute name="VALUE" x="-59.876" y="109.041" size="1.778" layer="96" font="vector"/>
+</instance>
+<instance part="C5" gate="G$1" x="-52.1" y="111.2">
+<attribute name="NAME" x="-50.576" y="114.121" size="1.778" layer="95" font="vector"/>
+<attribute name="VALUE" x="-50.576" y="109.041" size="1.778" layer="96" font="vector"/>
+</instance>
+<instance part="C6" gate="G$1" x="-43" y="111.3">
+<attribute name="NAME" x="-41.476" y="114.221" size="1.778" layer="95" font="vector"/>
+<attribute name="VALUE" x="-41.476" y="109.141" size="1.778" layer="96" font="vector"/>
+</instance>
+<instance part="GND2" gate="1" x="-61.5" y="106.1">
+<attribute name="VALUE" x="-61.5" y="105.846" size="1.778" layer="96" align="top-center"/>
+</instance>
+<instance part="GND5" gate="1" x="-52.1" y="106.1">
+<attribute name="VALUE" x="-52.1" y="105.846" size="1.778" layer="96" align="top-center"/>
+</instance>
+<instance part="GND8" gate="1" x="-43" y="106.1">
+<attribute name="VALUE" x="-43" y="105.846" size="1.778" layer="96" align="top-center"/>
+</instance>
+<instance part="SUPPLY2" gate="G$1" x="-61.2" y="119.8">
+<attribute name="VALUE" x="-61.2" y="122.594" size="1.778" layer="96" align="bottom-center"/>
+</instance>
+<instance part="SUPPLY7" gate="G$1" x="-52.2" y="119.9">
+<attribute name="VALUE" x="-52.2" y="122.694" size="1.778" layer="96" align="bottom-center"/>
+</instance>
+<instance part="SUPPLY8" gate="G$1" x="-42.9" y="119.9">
+<attribute name="VALUE" x="-42.9" y="122.694" size="1.778" layer="96" align="bottom-center"/>
+</instance>
+<instance part="GND9" gate="1" x="-81.3" y="75.8">
+<attribute name="VALUE" x="-81.3" y="75.546" size="1.778" layer="96" align="top-center"/>
+</instance>
+<instance part="GND10" gate="1" x="-127.1" y="62.8">
+<attribute name="VALUE" x="-127.1" y="62.546" size="1.778" layer="96" align="top-center"/>
+</instance>
+<instance part="C7" gate="G$1" x="-96.9" y="54" rot="R90">
+<attribute name="NAME" x="-99.821" y="55.524" size="1.778" layer="95" font="vector" rot="R90"/>
+<attribute name="VALUE" x="-94.741" y="55.524" size="1.778" layer="96" font="vector" rot="R90"/>
+</instance>
+<instance part="C8" gate="G$1" x="-99.3" y="46.2" rot="R270">
+<attribute name="NAME" x="-96.379" y="44.676" size="1.778" layer="95" font="vector" rot="R270"/>
+<attribute name="VALUE" x="-101.459" y="44.676" size="1.778" layer="96" font="vector" rot="R270"/>
+</instance>
+<instance part="C9" gate="G$1" x="-127.1" y="73.9" rot="R180">
+<attribute name="NAME" x="-128.624" y="70.979" size="1.778" layer="95" font="vector" rot="R180"/>
+<attribute name="VALUE" x="-128.624" y="76.059" size="1.778" layer="96" font="vector" rot="R180"/>
 </instance>
 </instances>
 <busses>
@@ -2800,6 +3041,17 @@ Lectureship dozent-rb: &amp;nbsp;&lt;a href="http://www.dozent-rb.de/" target="_
 <wire x1="-58.42" y1="25.4" x2="-63.5" y2="25.4" width="0.1524" layer="91"/>
 <wire x1="-58.42" y1="25.4" x2="-58.42" y2="17.78" width="0.1524" layer="91"/>
 <junction x="-58.42" y="17.78"/>
+</segment>
+<segment>
+<pinref part="U2" gate="G$1" pin="GND"/>
+<pinref part="GND9" gate="1" pin="GND"/>
+<wire x1="-83.82" y1="78.74" x2="-81.3" y2="78.74" width="0.1524" layer="91"/>
+<wire x1="-81.3" y1="78.74" x2="-81.3" y2="78.34" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="C9" gate="G$1" pin="1"/>
+<pinref part="GND10" gate="1" pin="GND"/>
+<wire x1="-127.1" y1="68.82" x2="-127.1" y2="65.34" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="3.3V" class="0">
@@ -2978,6 +3230,85 @@ Lectureship dozent-rb: &amp;nbsp;&lt;a href="http://www.dozent-rb.de/" target="_
 <wire x1="27.94" y1="-60.96" x2="25.4" y2="-60.96" width="0.1524" layer="91"/>
 <wire x1="27.94" y1="-76.2" x2="27.94" y2="-60.96" width="0.1524" layer="91"/>
 <junction x="27.94" y="-60.96"/>
+</segment>
+</net>
+<net name="1.8V" class="0">
+<segment>
+<pinref part="SUPPLY2" gate="G$1" pin="1.8V"/>
+<pinref part="C4" gate="G$1" pin="1"/>
+<wire x1="-61.2" y1="119.8" x2="-61.2" y2="116.28" width="0.1524" layer="91"/>
+<wire x1="-61.2" y1="116.28" x2="-61.4" y2="116.28" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="SUPPLY7" gate="G$1" pin="1.8V"/>
+<pinref part="C5" gate="G$1" pin="1"/>
+<wire x1="-52.2" y1="119.9" x2="-52.2" y2="119.6" width="0.1524" layer="91"/>
+<wire x1="-52.2" y1="119.6" x2="-52.2" y2="119.4" width="0.1524" layer="91"/>
+<wire x1="-52.2" y1="119.3" x2="-52.2" y2="116.28" width="0.1524" layer="91"/>
+<wire x1="-52.2" y1="116.28" x2="-52.1" y2="116.28" width="0.1524" layer="91"/>
+<pinref part="U2" gate="G$1" pin="VDDA"/>
+<wire x1="-83.82" y1="114.3" x2="-83.82" y2="119.4" width="0.1524" layer="91"/>
+<wire x1="-83.82" y1="119.4" x2="-84" y2="119.4" width="0.1524" layer="91"/>
+<wire x1="-83.82" y1="119.4" x2="-52.2" y2="119.4" width="0.1524" layer="91"/>
+<wire x1="-52.2" y1="119.4" x2="-52.2" y2="119.3" width="0.1524" layer="91"/>
+<junction x="-52.2" y="119.6"/>
+</segment>
+<segment>
+<pinref part="SUPPLY8" gate="G$1" pin="1.8V"/>
+<pinref part="C6" gate="G$1" pin="1"/>
+<wire x1="-42.9" y1="119.9" x2="-42.9" y2="118.4" width="0.1524" layer="91"/>
+<wire x1="-42.9" y1="118.4" x2="-42.9" y2="116.38" width="0.1524" layer="91"/>
+<wire x1="-42.9" y1="116.38" x2="-43" y2="116.38" width="0.1524" layer="91"/>
+<pinref part="U2" gate="G$1" pin="VDDIO"/>
+<wire x1="-83.82" y1="109.22" x2="-78.8" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="-78.8" y1="109.22" x2="-78.8" y2="114.8" width="0.1524" layer="91"/>
+<wire x1="-78.8" y1="114.8" x2="-68.8" y2="114.8" width="0.1524" layer="91"/>
+<wire x1="-68.8" y1="114.8" x2="-68.8" y2="98.7" width="0.1524" layer="91"/>
+<wire x1="-68.8" y1="98.7" x2="-37.4" y2="98.7" width="0.1524" layer="91"/>
+<wire x1="-37.4" y1="98.7" x2="-37.4" y2="118.4" width="0.1524" layer="91"/>
+<wire x1="-37.4" y1="118.4" x2="-42.9" y2="118.4" width="0.1524" layer="91"/>
+<junction x="-42.9" y="118.4"/>
+</segment>
+</net>
+<net name="N$3" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="VDDD"/>
+<wire x1="-83.82" y1="111.76" x2="-81.3" y2="111.76" width="0.1524" layer="91"/>
+<wire x1="-81.3" y1="111.76" x2="-81.3" y2="116.9" width="0.1524" layer="91"/>
+<wire x1="-81.3" y1="116.9" x2="-61.4" y2="116.9" width="0.1524" layer="91"/>
+<wire x1="-61.4" y1="116.9" x2="-61.1" y2="116.9" width="0.1524" layer="91"/>
+<wire x1="-61.1" y1="116.9" x2="-61.1" y2="117.1" width="0.1524" layer="91"/>
+<junction x="-61.4" y="116.9"/>
+</segment>
+</net>
+<net name="N$1" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="LINEOUT_R"/>
+<wire x1="-83.82" y1="93.98" x2="-68.6" y2="93.98" width="0.1524" layer="91"/>
+<wire x1="-68.6" y1="93.98" x2="-68.6" y2="60.4" width="0.1524" layer="91"/>
+<wire x1="-68.6" y1="60.4" x2="-81" y2="60.4" width="0.1524" layer="91"/>
+<wire x1="-81" y1="60.4" x2="-81" y2="46.2" width="0.1524" layer="91"/>
+<pinref part="C8" gate="G$1" pin="1"/>
+<wire x1="-81" y1="46.2" x2="-94.22" y2="46.2" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$2" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="LINEOUT_L"/>
+<wire x1="-83.82" y1="91.44" x2="-71" y2="91.44" width="0.1524" layer="91"/>
+<wire x1="-71" y1="91.44" x2="-71" y2="62.7" width="0.1524" layer="91"/>
+<wire x1="-71" y1="62.7" x2="-83.4" y2="62.7" width="0.1524" layer="91"/>
+<wire x1="-83.4" y1="62.7" x2="-83.4" y2="54" width="0.1524" layer="91"/>
+<pinref part="C7" gate="G$1" pin="2"/>
+<wire x1="-83.4" y1="54" x2="-94.36" y2="54" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$15" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="VAG"/>
+<pinref part="C9" gate="G$1" pin="2"/>
+<wire x1="-124.46" y1="81.28" x2="-127.1" y2="81.28" width="0.1524" layer="91"/>
+<wire x1="-127.1" y1="81.28" x2="-127.1" y2="76.44" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
