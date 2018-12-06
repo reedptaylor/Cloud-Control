@@ -1099,6 +1099,35 @@ Please send your comments to the mail address above.</description>
 </package>
 </packages>
 </library>
+<library name="LD1117S33CTR">
+<packages>
+<package name="SOT223">
+<wire x1="1.778" y1="-3.2766" x2="-1.778" y2="-3.2766" width="0.2032" layer="21"/>
+<wire x1="-1.778" y1="-3.2766" x2="-1.778" y2="3.2766" width="0.2032" layer="21"/>
+<wire x1="-1.778" y1="3.2766" x2="1.778" y2="3.2766" width="0.2032" layer="21"/>
+<wire x1="1.778" y1="3.2766" x2="1.778" y2="-3.2766" width="0.2032" layer="21"/>
+<text x="-4.3302" y="-1.023690625" size="0.815096875" layer="21" ratio="12" rot="R270">3</text>
+<text x="2.5429" y="-1.90716875" size="0.813728125" layer="21" ratio="12" rot="R270">4</text>
+<text x="-4.32865" y="3.461109375" size="0.814803125" layer="21" ratio="12" rot="R270">1</text>
+<text x="-4.328940625" y="1.291059375" size="0.813090625" layer="21" ratio="12" rot="R270">2</text>
+<text x="0.050928125" y="2.54638125" size="1.273190625" layer="25" rot="R270">&gt;NAME</text>
+<text x="-1.32435" y="2.54681875" size="1.273409375" layer="27" rot="R270">&gt;VALUE</text>
+<rectangle x1="1.13148125" y1="-0.928065625" x2="4.3307" y2="0.9271" layer="51" rot="R270"/>
+<rectangle x1="-3.164990625" y1="-0.927890625" x2="-2.2987" y2="0.9271" layer="51" rot="R270"/>
+<rectangle x1="-3.16743125" y1="1.38655" x2="-2.2987" y2="3.2385" layer="51" rot="R270"/>
+<rectangle x1="-3.165109375" y1="-3.24138125" x2="-2.2987" y2="-1.3843" layer="51" rot="R270"/>
+<rectangle x1="1.1318" y1="-0.928325" x2="4.3307" y2="0.9271" layer="51" rot="R270"/>
+<rectangle x1="-3.16965" y1="-0.92925625" x2="-2.2987" y2="0.9271" layer="51" rot="R270"/>
+<rectangle x1="-3.16635" y1="1.38606875" x2="-2.2987" y2="3.2385" layer="51" rot="R270"/>
+<rectangle x1="-3.173259375" y1="-3.24973125" x2="-2.2987" y2="-1.3843" layer="51" rot="R270"/>
+<circle x="-3.175" y="3.683" radius="0.127" width="0.127" layer="21"/>
+<smd name="1" x="-3.0988" y="2.3114" dx="1.2192" dy="2.2352" layer="1" rot="R270"/>
+<smd name="2" x="-3.0988" y="0" dx="1.2192" dy="2.2352" layer="1" rot="R270"/>
+<smd name="3" x="-3.0988" y="-2.3114" dx="1.2192" dy="2.2352" layer="1" rot="R270"/>
+<smd name="4" x="3.099" y="0" dx="3.6" dy="2.2" layer="1" rot="R270"/>
+</package>
+</packages>
+</library>
 <library name="_hhn_con_pinhead_box_1mm27">
 <description>&lt;h2&gt;Pin Header, Box-Type, 1.27mm/0.5"/50mil Pitch, THT and SMT&lt;/h2&gt;
 
@@ -1192,35 +1221,6 @@ Lectureship dozent-rb: &amp;nbsp;&lt;a href="http://www.dozent-rb.de/" target="_
 <vertex x="-2.8575" y="-3.2544"/>
 <vertex x="-2.2225" y="-3.2544"/>
 </polygon>
-</package>
-</packages>
-</library>
-<library name="LD1117S33CTR">
-<packages>
-<package name="SOT223">
-<wire x1="1.778" y1="-3.2766" x2="-1.778" y2="-3.2766" width="0.2032" layer="21"/>
-<wire x1="-1.778" y1="-3.2766" x2="-1.778" y2="3.2766" width="0.2032" layer="21"/>
-<wire x1="-1.778" y1="3.2766" x2="1.778" y2="3.2766" width="0.2032" layer="21"/>
-<wire x1="1.778" y1="3.2766" x2="1.778" y2="-3.2766" width="0.2032" layer="21"/>
-<text x="-4.3302" y="-1.023690625" size="0.815096875" layer="21" ratio="12" rot="R270">3</text>
-<text x="2.5429" y="-1.90716875" size="0.813728125" layer="21" ratio="12" rot="R270">4</text>
-<text x="-4.32865" y="3.461109375" size="0.814803125" layer="21" ratio="12" rot="R270">1</text>
-<text x="-4.328940625" y="1.291059375" size="0.813090625" layer="21" ratio="12" rot="R270">2</text>
-<text x="0.050928125" y="2.54638125" size="1.273190625" layer="25" rot="R270">&gt;NAME</text>
-<text x="-1.32435" y="2.54681875" size="1.273409375" layer="27" rot="R270">&gt;VALUE</text>
-<rectangle x1="1.13148125" y1="-0.928065625" x2="4.3307" y2="0.9271" layer="51" rot="R270"/>
-<rectangle x1="-3.164990625" y1="-0.927890625" x2="-2.2987" y2="0.9271" layer="51" rot="R270"/>
-<rectangle x1="-3.16743125" y1="1.38655" x2="-2.2987" y2="3.2385" layer="51" rot="R270"/>
-<rectangle x1="-3.165109375" y1="-3.24138125" x2="-2.2987" y2="-1.3843" layer="51" rot="R270"/>
-<rectangle x1="1.1318" y1="-0.928325" x2="4.3307" y2="0.9271" layer="51" rot="R270"/>
-<rectangle x1="-3.16965" y1="-0.92925625" x2="-2.2987" y2="0.9271" layer="51" rot="R270"/>
-<rectangle x1="-3.16635" y1="1.38606875" x2="-2.2987" y2="3.2385" layer="51" rot="R270"/>
-<rectangle x1="-3.173259375" y1="-3.24973125" x2="-2.2987" y2="-1.3843" layer="51" rot="R270"/>
-<circle x="-3.175" y="3.683" radius="0.127" width="0.127" layer="21"/>
-<smd name="1" x="-3.0988" y="2.3114" dx="1.2192" dy="2.2352" layer="1" rot="R270"/>
-<smd name="2" x="-3.0988" y="0" dx="1.2192" dy="2.2352" layer="1" rot="R270"/>
-<smd name="3" x="-3.0988" y="-2.3114" dx="1.2192" dy="2.2352" layer="1" rot="R270"/>
-<smd name="4" x="3.099" y="0" dx="3.6" dy="2.2" layer="1" rot="R270"/>
 </package>
 </packages>
 </library>
@@ -1530,9 +1530,9 @@ design rules under a new name.</description>
 <attribute name="PROD_ID" value="RES-08270" x="-87.63" y="46.99" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="VALUE" x="27.178" y="69.85" size="0.6096" layer="27" font="vector" ratio="20" rot="R270" align="top-center"/>
 </element>
-<element name="U$1" library="SOT230P700X180-4N" package="SOT230P700X180-4N" value="SOT230P700X180-4N" x="15.24" y="82.55" smashed="yes" rot="R90">
-<attribute name="NAME" x="13.2209" y="77.0685" size="0.6096" layer="25" rot="R90"/>
-<attribute name="VALUE" x="20.0804" y="76.9147" size="0.6096" layer="27" rot="R90" align="top-left"/>
+<element name="U$1" library="SOT230P700X180-4N" package="SOT230P700X180-4N" value="SOT230P700X180-4N" x="16.51" y="82.55" smashed="yes" rot="R90">
+<attribute name="NAME" x="14.4909" y="77.0685" size="0.6096" layer="25" rot="R90"/>
+<attribute name="VALUE" x="21.3504" y="76.9147" size="0.6096" layer="27" rot="R90" align="top-left"/>
 </element>
 <element name="U$2" library="XTAL_FA-238_25.0000MB-C3" package="XTAL_FA-238_25.0000MB-C3" value="XTAL_FA-238_25.0000MB-C3" x="55.88" y="38.1" smashed="yes" rot="R90">
 <attribute name="VALUE" x="64.00721875" y="35.7039" size="0.6096" layer="27" rot="R180"/>
@@ -1549,19 +1549,19 @@ design rules under a new name.</description>
 <attribute name="PACKAGE" value="QFN-20 Freescale Semiconductor" x="69.85" y="-21.59" size="1.778" layer="27" display="off"/>
 <attribute name="PRICE" value="None" x="69.85" y="-21.59" size="1.778" layer="27" display="off"/>
 </element>
+<element name="U3" library="LD1117S33CTR" package="SOT223" value="LD1117S33CTR" x="16.51" y="72.39" smashed="yes" rot="R180">
+<attribute name="AVAILABILITY" value="Unavailable" x="-34.29" y="147.32" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="DESCRIPTION" value=" LD1117 Series 1300 mA 3.3 V Fixed Output Positive Voltage LDO Regulator- SOT-223 " x="-34.29" y="147.32" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MF" value="STMicroelectronics" x="-34.29" y="147.32" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MP" value="LD1117S33CTR" x="-34.29" y="147.32" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="NAME" x="16.459071875" y="69.84361875" size="0.6096" layer="25" rot="R90"/>
+<attribute name="PACKAGE" value="SOT-223 STMicroelectronics" x="-34.29" y="147.32" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="PRICE" value="None" x="-34.29" y="147.32" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="VALUE" x="17.83435" y="69.84318125" size="0.6096" layer="27" rot="R90"/>
+</element>
 <element name="X1" library="_hhn_con_pinhead_box_1mm27" package="PHB_1MM27_2X05_SNT" value="PHB_1MM27_2X05_SNT" x="12.7" y="44.45" smashed="yes" rot="R90">
 <attribute name="NAME" x="11.0331" y="51.8319" size="1.27" layer="25" ratio="9" rot="R90"/>
 <attribute name="VALUE" x="8.4932" y="55.3244" size="1.27" layer="27" ratio="9" rot="R270"/>
-</element>
-<element name="U3" library="LD1117S33CTR" package="SOT223" value="LD1117S33CTR" x="15.24" y="72.39" smashed="yes" rot="R180">
-<attribute name="AVAILABILITY" value="Unavailable" x="15.24" y="72.39" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="DESCRIPTION" value=" LD1117 Series 1300 mA 3.3 V Fixed Output Positive Voltage LDO Regulator- SOT-223 " x="15.24" y="72.39" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="MF" value="STMicroelectronics" x="15.24" y="72.39" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="MP" value="LD1117S33CTR" x="15.24" y="72.39" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="NAME" x="15.189071875" y="69.84361875" size="0.6096" layer="25" rot="R90"/>
-<attribute name="PACKAGE" value="SOT-223 STMicroelectronics" x="15.24" y="72.39" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="PRICE" value="None" x="15.24" y="72.39" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="VALUE" x="16.56435" y="69.84318125" size="0.6096" layer="27" rot="R90"/>
 </element>
 </elements>
 <signals>
@@ -1628,6 +1628,7 @@ design rules under a new name.</description>
 <contactref element="C9" pad="1"/>
 <contactref element="J1" pad="RING2"/>
 <contactref element="C10" pad="2"/>
+<contactref element="U3" pad="1"/>
 <contactref element="J3" pad="1"/>
 <contactref element="C12" pad="2"/>
 <contactref element="C11" pad="2"/>
@@ -1640,7 +1641,6 @@ design rules under a new name.</description>
 <contactref element="U$2" pad="2"/>
 <contactref element="C14" pad="2"/>
 <contactref element="C13" pad="2"/>
-<contactref element="U3" pad="1"/>
 <wire x1="60.96" y1="86.78" x2="64.77" y2="88.48" width="0" layer="19" extent="1-1"/>
 <wire x1="60.96" y1="83.13" x2="60.96" y2="86.78" width="0" layer="19" extent="1-1"/>
 <wire x1="64.77" y1="83.13" x2="60.96" y2="83.13" width="0" layer="19" extent="1-1"/>
@@ -1668,7 +1668,10 @@ design rules under a new name.</description>
 <wire x1="11.43" y1="62.23" x2="12.28" y2="55.88" width="0" layer="19" extent="1-1"/>
 <wire x1="43.87" y1="93.98" x2="53.34" y2="88.9" width="0" layer="19" extent="1-1"/>
 <wire x1="40.08" y1="89.51" x2="43.87" y2="93.98" width="0" layer="19" extent="1-1"/>
-<wire x1="18.3388" y1="70.0786" x2="13.335" y2="43.18" width="0" layer="19" extent="1-1"/>
+<wire x1="19.6088" y1="70.0786" x2="11.43" y2="62.23" width="0" layer="19" extent="1-1"/>
+<wire x1="19.66" y1="80.25" x2="19.6088" y2="70.0786" width="0" layer="19" extent="1-1"/>
+<wire x1="13.36" y1="82.55" x2="19.66" y2="80.25" width="0" layer="19" extent="1-1"/>
+<wire x1="12.7" y1="92.71" x2="13.36" y2="82.55" width="0" layer="19" extent="1-1"/>
 <wire x1="37.68" y1="38.1" x2="34.63" y2="50.94" width="0" layer="19" extent="1-1"/>
 <wire x1="43.18" y1="38.1" x2="37.68" y2="38.1" width="0" layer="19" extent="1-1"/>
 <wire x1="47.28" y1="44.79" x2="43.18" y2="38.1" width="0" layer="19" extent="1-1"/>
@@ -1676,9 +1679,6 @@ design rules under a new name.</description>
 <wire x1="52.78" y1="44.79" x2="52.28" y2="44.79" width="0" layer="19" extent="1-1"/>
 <wire x1="56.98" y1="37.3" x2="52.78" y2="44.79" width="0" layer="19" extent="1-1"/>
 <wire x1="63.08" y1="38.1" x2="56.98" y2="37.3" width="0" layer="19" extent="1-1"/>
-<wire x1="18.39" y1="80.25" x2="11.43" y2="62.23" width="0" layer="19" extent="1-1"/>
-<wire x1="12.09" y1="82.55" x2="18.39" y2="80.25" width="0" layer="19" extent="1-1"/>
-<wire x1="12.7" y1="92.71" x2="12.09" y2="82.55" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="3.3V">
 <contactref element="U1" pad="15"/>
@@ -1704,14 +1704,17 @@ design rules under a new name.</description>
 <contactref element="X1" pad="1"/>
 <contactref element="J2" pad="2"/>
 <contactref element="C3" pad="1"/>
+<contactref element="U3" pad="2"/>
+<contactref element="U3" pad="4"/>
 <contactref element="C10" pad="1"/>
-<contactref element="U3" pad="2" route="any" routetag="G$1.OUT"/>
 <wire x1="52.28" y1="74.59" x2="58.78" y2="74.59" width="0" layer="19" extent="1-1"/>
 <wire x1="41.78" y1="74.59" x2="52.28" y2="74.59" width="0" layer="19" extent="1-1"/>
 <wire x1="34.63" y1="68.44" x2="41.78" y2="74.59" width="0" layer="19" extent="1-1"/>
 <wire x1="34.63" y1="63.94" x2="34.63" y2="68.44" width="0" layer="19" extent="1-1"/>
 <wire x1="34.63" y1="60.44" x2="34.63" y2="63.94" width="0" layer="19" extent="1-1"/>
 <wire x1="27.94" y1="70.7" x2="34.63" y2="68.44" width="0" layer="19" extent="1-1"/>
+<wire x1="19.6088" y1="72.39" x2="27.94" y2="70.7" width="0" layer="19" extent="1-1"/>
+<wire x1="13.411" y1="72.39" x2="19.6088" y2="72.39" width="0" layer="19" extent="1-1"/>
 <wire x1="34.63" y1="51.94" x2="34.63" y2="60.44" width="0" layer="19" extent="1-1"/>
 <wire x1="64.43" y1="64.94" x2="58.78" y2="74.59" width="0" layer="19" extent="1-1"/>
 <wire x1="64.43" y1="63.44" x2="64.43" y2="64.94" width="0" layer="19" extent="1-1"/>
@@ -1728,8 +1731,7 @@ design rules under a new name.</description>
 <wire x1="20.74" y1="38.1" x2="19.9" y2="44.45" width="0" layer="19" extent="1-1"/>
 <wire x1="13.335" y1="41.91" x2="19.9" y2="44.45" width="0" layer="19" extent="1-1"/>
 <wire x1="28.36" y1="38.1" x2="20.74" y2="38.1" width="0" layer="19" extent="1-1"/>
-<wire x1="18.3388" y1="72.39" x2="13.335" y2="41.91" width="0" layer="19" extent="1-1"/>
-<wire x1="15.24" y1="92.71" x2="27.94" y2="70.7" width="0" layer="19" extent="1-1"/>
+<wire x1="15.24" y1="92.71" x2="13.411" y2="72.39" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$8">
 <contactref element="U2" pad="13"/>
@@ -1822,13 +1824,13 @@ design rules under a new name.</description>
 <wire x1="56.78" y1="44.79" x2="22.86" y2="92.71" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="VCC">
+<contactref element="U3" pad="3"/>
 <contactref element="J3" pad="2"/>
 <contactref element="U$1" pad="3"/>
 <contactref element="C11" pad="1"/>
-<contactref element="U3" pad="3"/>
-<wire x1="11.43" y1="64.77" x2="18.39" y2="84.85" width="0" layer="19" extent="1-1"/>
+<wire x1="19.6088" y1="74.7014" x2="19.66" y2="84.85" width="0" layer="19" extent="1-1"/>
+<wire x1="11.43" y1="64.77" x2="19.6088" y2="74.7014" width="0" layer="19" extent="1-1"/>
 <wire x1="14.39" y1="55.88" x2="11.43" y2="64.77" width="0" layer="19" extent="1-1"/>
-<wire x1="18.3388" y1="74.7014" x2="14.39" y2="55.88" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$18">
 <contactref element="U1" pad="35"/>
@@ -1848,8 +1850,8 @@ design rules under a new name.</description>
 <wire x1="54.745" y1="88.5" x2="60.96" y2="81.97" width="0" layer="19" extent="1-1"/>
 <wire x1="51.935" y1="88.9" x2="54.745" y2="88.5" width="0" layer="19" extent="1-1"/>
 <wire x1="52.54" y1="90.305" x2="51.935" y2="88.9" width="0" layer="19" extent="1-1"/>
-<wire x1="18.39" y1="82.55" x2="51.935" y2="88.9" width="0" layer="19" extent="1-1"/>
-<wire x1="26.09" y1="55.88" x2="18.39" y2="82.55" width="0" layer="19" extent="1-1"/>
+<wire x1="19.66" y1="82.55" x2="51.935" y2="88.9" width="0" layer="19" extent="1-1"/>
+<wire x1="26.09" y1="55.88" x2="19.66" y2="82.55" width="0" layer="19" extent="1-1"/>
 <wire x1="10.58" y1="55.88" x2="26.09" y2="55.88" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$3">

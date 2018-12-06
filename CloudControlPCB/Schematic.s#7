@@ -4384,10 +4384,10 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="C9" library="Homework1" deviceset="0.1UF" device="-0402-16V-10%" package3d_urn="urn:adsk.eagle:package:37413/1" value="0.1uF"/>
 <part name="U3" library="LD1117S33CTR" deviceset="LD1117S33CTR" device=""/>
 <part name="C10" library="SparkFun-Capacitors" library_urn="urn:adsk.eagle:library:510" deviceset="10UF" device="-0603-6.3V-20%" package3d_urn="urn:adsk.eagle:package:37414/1" value="10uF"/>
-<part name="C11" library="SparkFun-Capacitors" library_urn="urn:adsk.eagle:library:510" deviceset="100PF" device="-0603-50V-5%" package3d_urn="urn:adsk.eagle:package:37414/1" value="100pF"/>
 <part name="GND11" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="GND" device=""/>
 <part name="SUPPLY9" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="3.3V" device=""/>
 <part name="J3" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_02" device="" package3d_urn="urn:adsk.eagle:package:38039/1"/>
+<part name="C11" library="SparkFun-Capacitors" library_urn="urn:adsk.eagle:library:510" deviceset="100PF" device="-0402-50V-5%" package3d_urn="urn:adsk.eagle:package:37413/1" value="100PF"/>
 </parts>
 <sheets>
 <sheet>
@@ -4536,10 +4536,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="NAME" x="-77.216" y="-65.659" size="1.778" layer="95" font="vector"/>
 <attribute name="VALUE" x="-77.216" y="-70.739" size="1.778" layer="96" font="vector"/>
 </instance>
-<instance part="C11" gate="G$1" x="-127" y="-68.58" smashed="yes">
-<attribute name="NAME" x="-125.476" y="-65.659" size="1.778" layer="95" font="vector"/>
-<attribute name="VALUE" x="-125.476" y="-70.739" size="1.778" layer="96" font="vector"/>
-</instance>
 <instance part="GND11" gate="1" x="-101.6" y="-81.28" smashed="yes">
 <attribute name="VALUE" x="-101.6" y="-81.534" size="1.778" layer="96" align="top-center"/>
 </instance>
@@ -4549,6 +4545,10 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <instance part="J3" gate="G$1" x="-152.4" y="-63.5" smashed="yes">
 <attribute name="VALUE" x="-154.94" y="-68.326" size="1.778" layer="96" font="vector"/>
 <attribute name="NAME" x="-154.94" y="-57.912" size="1.778" layer="95" font="vector"/>
+</instance>
+<instance part="C11" gate="G$1" x="-127" y="-68.58" smashed="yes">
+<attribute name="NAME" x="-125.476" y="-65.659" size="1.778" layer="95" font="vector"/>
+<attribute name="VALUE" x="-125.476" y="-70.739" size="1.778" layer="96" font="vector"/>
 </instance>
 </instances>
 <busses>
@@ -4683,7 +4683,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <label x="-127" y="38.1" size="1.778" layer="95" align="bottom-right"/>
 </segment>
 <segment>
-<pinref part="C11" gate="G$1" pin="2"/>
 <wire x1="-127" y1="-71.12" x2="-127" y2="-76.2" width="0.1524" layer="91"/>
 <wire x1="-127" y1="-76.2" x2="-101.6" y2="-76.2" width="0.1524" layer="91"/>
 <pinref part="C10" gate="G$1" pin="2"/>
@@ -4698,6 +4697,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <wire x1="-144.78" y1="-63.5" x2="-144.78" y2="-76.2" width="0.1524" layer="91"/>
 <wire x1="-144.78" y1="-76.2" x2="-127" y2="-76.2" width="0.1524" layer="91"/>
 <junction x="-127" y="-76.2"/>
+<pinref part="C11" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="3.3V" class="0">
@@ -5000,13 +5000,13 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <net name="VCC" class="0">
 <segment>
 <pinref part="U3" gate="G$1" pin="IN"/>
-<pinref part="C11" gate="G$1" pin="1"/>
 <wire x1="-144.78" y1="-60.96" x2="-127" y2="-60.96" width="0.1524" layer="91"/>
 <wire x1="-127" y1="-60.96" x2="-119.38" y2="-60.96" width="0.1524" layer="91"/>
 <wire x1="-127" y1="-63.5" x2="-127" y2="-60.96" width="0.1524" layer="91"/>
 <junction x="-127" y="-60.96"/>
 <pinref part="J3" gate="G$1" pin="2"/>
 <label x="-142.24" y="-58.42" size="1.778" layer="95"/>
+<pinref part="C11" gate="G$1" pin="1"/>
 </segment>
 </net>
 </nets>
