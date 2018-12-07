@@ -3690,6 +3690,27 @@ Commonly used for small ceramic capacitors. Like our 0.1uF (http://www.sparkfun.
 </device>
 </devices>
 </deviceset>
+<deviceset name="18PF" prefix="C">
+<description>&lt;h3&gt;18pF ceramic capacitors&lt;/h3&gt;
+&lt;p&gt;A capacitor is a passive two-terminal electrical component used to store electrical energy temporarily in an electric field.&lt;/p&gt;</description>
+<gates>
+<gate name="G$1" symbol="CAP" x="0" y="0"/>
+</gates>
+<devices>
+<device name="-0603-50V-5%" package="0603">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="CAP-08267" constant="no"/>
+<attribute name="VALUE" value="18pF" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
 </devicesets>
 </library>
 <library name="_hhn_con_pinhead_box_1mm27">
@@ -4306,6 +4327,62 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </deviceset>
 </devicesets>
 </library>
+<library name="XTAL_FA-238_25.0000MB-C3">
+<packages>
+<package name="XTAL_FA-238_25.0000MB-C3">
+<wire x1="1.3" y1="1.65" x2="-1.3" y2="1.65" width="0.127" layer="51"/>
+<wire x1="-1.3" y1="1.65" x2="-1.3" y2="-1.65" width="0.127" layer="51"/>
+<wire x1="-1.3" y1="-1.65" x2="1.3" y2="-1.65" width="0.127" layer="51"/>
+<wire x1="1.3" y1="-1.65" x2="1.3" y2="1.65" width="0.127" layer="51"/>
+<wire x1="1.65" y1="2.05" x2="-1.65" y2="2.05" width="0.05" layer="39"/>
+<wire x1="-1.65" y1="2.05" x2="-1.65" y2="-2.05" width="0.05" layer="39"/>
+<wire x1="-1.65" y1="-2.05" x2="1.65" y2="-2.05" width="0.05" layer="39"/>
+<wire x1="1.65" y1="-2.05" x2="1.65" y2="2.05" width="0.05" layer="39"/>
+<circle x="-1.85" y="1.05" radius="0.1" width="0.2" layer="21"/>
+<text x="-2.0056" y="2.369090625" size="1.9593" layer="25">&gt;NAME</text>
+<text x="-2.3961" y="-4.31721875" size="1.903690625" layer="27">&gt;VALUE</text>
+<wire x1="1.3" y1="-0.15" x2="1.3" y2="0.15" width="0.127" layer="21"/>
+<wire x1="-1.3" y1="0.15" x2="-1.3" y2="-0.15" width="0.127" layer="21"/>
+<circle x="-0.834" y="1.177" radius="0.1" width="0.2" layer="51"/>
+<smd name="1" x="-0.8" y="1.1" dx="1.2" dy="1.4" layer="1"/>
+<smd name="2" x="-0.8" y="-1.1" dx="1.2" dy="1.4" layer="1"/>
+<smd name="4" x="0.8" y="1.1" dx="1.2" dy="1.4" layer="1"/>
+<smd name="3" x="0.8" y="-1.1" dx="1.2" dy="1.4" layer="1"/>
+</package>
+</packages>
+<symbols>
+<symbol name="XTAL_FA-238_25.0000MB-C3">
+<wire x1="-10.16" y1="7.62" x2="12.7" y2="7.62" width="0.254" layer="94"/>
+<wire x1="12.7" y1="7.62" x2="12.7" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="12.7" y1="-5.08" x2="-10.16" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="-10.16" y1="-5.08" x2="-10.16" y2="7.62" width="0.254" layer="94"/>
+<pin name="OUT" x="17.78" y="5.08" length="middle" rot="R180"/>
+<pin name="ST" x="17.78" y="-2.54" length="middle" rot="R180"/>
+<pin name="VCC" x="-15.24" y="5.08" length="middle"/>
+<pin name="GND" x="-15.24" y="-2.54" length="middle"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="XTAL_FA-238_25.0000MB-C3">
+<gates>
+<gate name="G$1" symbol="XTAL_FA-238_25.0000MB-C3" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="XTAL_FA-238_25.0000MB-C3">
+<connects>
+<connect gate="G$1" pin="GND" pad="2"/>
+<connect gate="G$1" pin="OUT" pad="3"/>
+<connect gate="G$1" pin="ST" pad="1"/>
+<connect gate="G$1" pin="VCC" pad="4"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -4360,6 +4437,12 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="U$1" library="SOT230P700X180-4N" deviceset="SOT230P700X180-4N" device=""/>
 <part name="C12" library="SparkFun-Capacitors" library_urn="urn:adsk.eagle:library:510" deviceset="10UF" device="-0603-6.3V-20%" package3d_urn="urn:adsk.eagle:package:37414/1" value="10uF"/>
 <part name="C11" library="SparkFun-Capacitors" deviceset="0.1UF" device="-0603-25V-(+80/-20%)" value="0.1uF"/>
+<part name="U$2" library="XTAL_FA-238_25.0000MB-C3" deviceset="XTAL_FA-238_25.0000MB-C3" device=""/>
+<part name="GND13" library="Homework1" deviceset="GND" device=""/>
+<part name="C13" library="SparkFun-Capacitors" deviceset="18PF" device="-0603-50V-5%" value="18pF"/>
+<part name="C14" library="SparkFun-Capacitors" deviceset="18PF" device="-0603-50V-5%" value="18pF"/>
+<part name="GND14" library="Homework1" deviceset="GND" device=""/>
+<part name="GND15" library="Homework1" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -4524,6 +4607,24 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <instance part="C11" gate="G$1" x="-127" y="-68.58">
 <attribute name="NAME" x="-125.476" y="-65.659" size="1.778" layer="95" font="vector"/>
 <attribute name="VALUE" x="-125.476" y="-70.739" size="1.778" layer="96" font="vector"/>
+</instance>
+<instance part="U$2" gate="G$1" x="137.16" y="-68.58"/>
+<instance part="GND13" gate="1" x="121.92" y="-81.28">
+<attribute name="VALUE" x="121.92" y="-81.534" size="1.778" layer="96" align="top-center"/>
+</instance>
+<instance part="C13" gate="G$1" x="170.18" y="-68.58">
+<attribute name="NAME" x="171.704" y="-65.659" size="1.778" layer="95" font="vector"/>
+<attribute name="VALUE" x="171.704" y="-70.739" size="1.778" layer="96" font="vector"/>
+</instance>
+<instance part="C14" gate="G$1" x="111.76" y="-68.58">
+<attribute name="NAME" x="113.284" y="-65.659" size="1.778" layer="95" font="vector"/>
+<attribute name="VALUE" x="113.284" y="-70.739" size="1.778" layer="96" font="vector"/>
+</instance>
+<instance part="GND14" gate="1" x="111.76" y="-73.66">
+<attribute name="VALUE" x="111.76" y="-73.914" size="1.778" layer="96" align="top-center"/>
+</instance>
+<instance part="GND15" gate="1" x="170.18" y="-73.66">
+<attribute name="VALUE" x="170.18" y="-73.914" size="1.778" layer="96" align="top-center"/>
 </instance>
 </instances>
 <busses>
@@ -4705,6 +4806,19 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pinref part="GND12" gate="1" pin="GND"/>
 <pinref part="J4" gate="G$1" pin="1"/>
 <wire x1="66.04" y1="-60.96" x2="66.04" y2="-55.88" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="U$2" gate="G$1" pin="GND"/>
+<pinref part="GND13" gate="1" pin="GND"/>
+<wire x1="121.92" y1="-71.12" x2="121.92" y2="-78.74" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="GND14" gate="1" pin="GND"/>
+<pinref part="C14" gate="G$1" pin="2"/>
+</segment>
+<segment>
+<pinref part="GND15" gate="1" pin="GND"/>
+<pinref part="C13" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="3.3V" class="0">
@@ -5020,6 +5134,30 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pinref part="C5" gate="G$1" pin="1"/>
 <wire x1="-55.88" y1="144.78" x2="-52.1" y2="144.78" width="0.1524" layer="91"/>
 <wire x1="-52.1" y1="144.78" x2="-52.1" y2="116.28" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$3" class="0">
+<segment>
+<pinref part="U$2" gate="G$1" pin="VCC"/>
+<pinref part="C14" gate="G$1" pin="1"/>
+<wire x1="121.92" y1="-63.5" x2="111.76" y2="-63.5" width="0.1524" layer="91"/>
+<wire x1="121.92" y1="-63.5" x2="121.92" y2="-58.42" width="0.1524" layer="91"/>
+<junction x="121.92" y="-63.5"/>
+<wire x1="121.92" y1="-58.42" x2="111.76" y2="-58.42" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="XTAL1"/>
+<wire x1="111.76" y1="-58.42" x2="111.76" y2="-43.18" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$19" class="0">
+<segment>
+<pinref part="U$2" gate="G$1" pin="OUT"/>
+<pinref part="C13" gate="G$1" pin="1"/>
+<wire x1="154.94" y1="-63.5" x2="170.18" y2="-63.5" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="XTAL2"/>
+<wire x1="121.92" y1="-43.18" x2="121.92" y2="-55.88" width="0.1524" layer="91"/>
+<wire x1="121.92" y1="-55.88" x2="154.94" y2="-55.88" width="0.1524" layer="91"/>
+<wire x1="154.94" y1="-55.88" x2="154.94" y2="-63.5" width="0.1524" layer="91"/>
+<junction x="154.94" y="-63.5"/>
 </segment>
 </net>
 </nets>
