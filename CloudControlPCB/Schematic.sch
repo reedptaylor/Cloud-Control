@@ -4443,6 +4443,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="GND15" library="Homework1" deviceset="GND" device=""/>
 <part name="U3" library="LD1117S33CTR" deviceset="LD1117S33CTR" device=""/>
 <part name="U$1" library="SOT230P700X180-4N" deviceset="SOT230P700X180-4N" device=""/>
+<part name="C15" library="SparkFun-Capacitors" deviceset="0.1UF" device="-0603-25V-(+80/-20%)" value="0.1uF"/>
 </parts>
 <sheets>
 <sheet>
@@ -4626,6 +4627,10 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="VALUE" x="-119.4147" y="-78.7747" size="1.78146875" layer="96"/>
 </instance>
 <instance part="U$1" gate="G$1" x="-104.14" y="-101.6" smashed="yes"/>
+<instance part="C15" gate="G$1" x="-116.84" y="-104.14" smashed="yes">
+<attribute name="NAME" x="-115.316" y="-101.219" size="1.778" layer="95" font="vector"/>
+<attribute name="VALUE" x="-115.316" y="-106.299" size="1.778" layer="96" font="vector"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -4779,12 +4784,16 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pinref part="C11" gate="G$1" pin="2"/>
 <wire x1="-127" y1="-71.12" x2="-127" y2="-76.2" width="0.1524" layer="91"/>
 <junction x="-127" y="-76.2"/>
-<wire x1="-101.6" y1="-109.22" x2="-121.92" y2="-109.22" width="0.1524" layer="91"/>
+<wire x1="-101.6" y1="-109.22" x2="-116.84" y2="-109.22" width="0.1524" layer="91"/>
+<wire x1="-116.84" y1="-109.22" x2="-121.92" y2="-109.22" width="0.1524" layer="91"/>
 <wire x1="-121.92" y1="-109.22" x2="-121.92" y2="-76.2" width="0.1524" layer="91"/>
 <junction x="-121.92" y="-76.2"/>
 <pinref part="U3" gate="G$1" pin="GND"/>
 <wire x1="-101.6" y1="-71.12" x2="-101.6" y2="-76.2" width="0.1524" layer="91"/>
 <pinref part="U$1" gate="G$1" pin="GND"/>
+<pinref part="C15" gate="G$1" pin="2"/>
+<wire x1="-116.84" y1="-106.68" x2="-116.84" y2="-109.22" width="0.1524" layer="91"/>
+<junction x="-116.84" y="-109.22"/>
 </segment>
 <segment>
 <pinref part="GND2" gate="1" pin="GND"/>
@@ -5077,6 +5086,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <wire x1="-119.38" y1="-60.96" x2="-127" y2="-60.96" width="0.1524" layer="91"/>
 <junction x="-127" y="-60.96"/>
 <pinref part="U$1" gate="G$1" pin="IN"/>
+<pinref part="C15" gate="G$1" pin="1"/>
+<wire x1="-116.84" y1="-96.52" x2="-116.84" y2="-99.06" width="0.1524" layer="91"/>
+<junction x="-116.84" y="-96.52"/>
 </segment>
 </net>
 <net name="N$18" class="0">
