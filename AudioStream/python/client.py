@@ -2,7 +2,7 @@ import socket
 import pyaudio
 
 CHUNK = 512
-FORMAT = pyaudio.paFloat32
+FORMAT = pyaudio.paInt32
 CHANNELS = 2
 RATE = 44100
 RECORD_SECONDS = 5

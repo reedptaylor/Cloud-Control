@@ -5,14 +5,14 @@ import wave
 import pyaudio
 
 CHUNK = 512
-FORMAT = pyaudio.paFloat32
+FORMAT = pyaudio.paInt32
 CHANNELS = 2
 RATE = 44100
-WAVE_OUTPUT_FILENAME = "server_output.wav"
+# WAVE_OUTPUT_FILENAME = "server_output.wav"
 WIDTH = 2
 
 HOST = 'localhost'     # Symbolic name meaning all available interfaces
-PORT = 50007              # Arbitrary non-privileged port
+PORT = 12000              # Arbitrary non-privileged port
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind((HOST, PORT))
@@ -28,7 +28,7 @@ stream = p.open(format=p.get_format_from_width(WIDTH),
                 frames_per_buffer=CHUNK)
 q = Queue.Queue()
 
-frames = []
+# frames = []
 
 stream.start_stream()
 
@@ -43,14 +43,14 @@ def main():
 
         # stream.write(data)
         data = conn.recv(CHUNK)
-        frames.append(data)
-
-    wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
-    wf.setnchannels(CHANNELS)
-    wf.setsampwidth(p.get_sample_size(FORMAT))
-    wf.setframerate(RATE)
-    wf.writeframes(b''.join(frames))
-    wf.close()
+    #     frames.append(data)
+    #
+    # wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
+    # wf.setnchannels(CHANNELS)
+    # wf.setsampwidth(p.get_sample_size(FORMAT))
+    # wf.setframerate(RATE)
+    # wf.writeframes(b''.join(frames))
+    # wf.close()
 
     stream.stop_stream()
     stream.close()
