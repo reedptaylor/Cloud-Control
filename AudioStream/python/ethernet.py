@@ -1,6 +1,13 @@
 from socket import *
+import pyaudio
 
-def sendeth(ethernet_packet, payload, interface = "en7"):
+CHUNK = 512
+FORMAT = pyaudio.paInt32
+CHANNELS = 2
+RATE = 6000
+RECORD_SECONDS = 5
+
+def sendeth(ethernet_packet, payload, interface = "eth0"):
   """Send raw Ethernet packet on interface."""
   s = socket(AF_PACKET, SOCK_RAW)
 
@@ -14,6 +21,8 @@ def pack(byte_sequence):
   return b"".join(map(chr, byte_sequence))
 
 if __name__ == "__main__":
+    ethernet_packet = [0x00, 0x60, 0x37, 0x12, 0x34, 0x56, 0x78, 0x7b, 0x8a,
+                       0xad, 0xa5, 0x81, 0x08, 0x00]
       # Note that this example contains HARDCODED packets, meaning that
       # it will ONLY work on the system it was designed for.
 
@@ -21,17 +30,44 @@ if __name__ == "__main__":
       # You can do so yourself.  Another way to construct these manually is to use
       # the impacket library (sudo pip install impacket)
 
-      # src=fe:ed:fa:ce:be:ef, dst=52:54:00:12:35:02, type=0x0800 (IP)
-      ethernet_packet = [0x00, 0x60, 0x37, 0x12, 0x34, 0x56, 0x78, 0x7b, 0x8a,
-                         0xad, 0xa5, 0x81, 0x08, 0x00]
+      p = pyaudio.PyAudio()
 
-      icmp_ping = [0x08, 0x00, 0x2b, 0x45, 0x11, 0x22, 0x00, 0x02, 0xa9, 0xf4, 0x5c,
-                   0x53, 0x00, 0x00, 0x00, 0x00, 0xf5, 0x7b, 0x01, 0x00, 0x00, 0x00,
-                   0x00, 0x00, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,
-                   0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23,
-                   0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2a, 0x2b, 0x2c, 0x2d, 0x2e,
-                   0x2f, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37]
+      stream = p.open(format=FORMAT,
+                      channels=CHANNELS,
+                      rate=RATE,
+                      input=True,
+                      frames_per_buffer=CHUNK)
+
+      stream.start_stream()
+
+      print("*_>recording")
+
+      for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
+          try:
+              data = stream.read(CHUNK)
+          except Exception as e:
+              print e
+              data = '\x00' * CHUNK
+          r = sendeth(pack(ethernet_packet), data)
+
+      print("*_>done recording")
+
+      stream.stop_stream()
+      stream.close()
+      p.terminate()
+
+      print("*_>closed")
+
+      # src=fe:ed:fa:ce:be:ef, dst=52:54:00:12:35:02, type=0x0800 (IP)
+
+
+      # icmp_ping = [0x08, 0x00, 0x2b, 0x45, 0x11, 0x22, 0x00, 0x02, 0xa9, 0xf4, 0x5c,
+      #              0x53, 0x00, 0x00, 0x00, 0x00, 0xf5, 0x7b, 0x01, 0x00, 0x00, 0x00,
+      #              0x00, 0x00, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,
+      #              0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23,
+      #              0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2a, 0x2b, 0x2c, 0x2d, 0x2e,
+      #              0x2f, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37]
 
       # Construct Ethernet packet with an IPv4 ICMP PING request as payload
-      r = sendeth(pack(ethernet_packet), pack(icmp_ping))
-      print("Sent Ethernet w/IPv4 ICMP PING payload of length %d bytes" % r)
+
+      # print("Sent Ethernet w/IPv4 ICMP PING payload of length %d bytes" % r)

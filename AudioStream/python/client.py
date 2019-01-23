@@ -4,7 +4,7 @@ import pyaudio
 CHUNK = 512
 FORMAT = pyaudio.paInt32
 CHANNELS = 2
-RATE = 44100
+RATE = 6000
 RECORD_SECONDS = 5
 
 HOST = 'localhost'    # The remote host
@@ -34,7 +34,7 @@ def main():
             print e
             data = '\x00' * CHUNK
 
-        # print len(data)
+        print data.encode("hex");
         s.sendall(data)
 
     print("*_>done recording")

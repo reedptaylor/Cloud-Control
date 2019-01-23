@@ -7,7 +7,7 @@ import pyaudio
 CHUNK = 512
 FORMAT = pyaudio.paInt32
 CHANNELS = 2
-RATE = 44100
+RATE = 6000
 # WAVE_OUTPUT_FILENAME = "server_output.wav"
 WIDTH = 2
 
