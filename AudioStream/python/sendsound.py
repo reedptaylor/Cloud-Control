@@ -1,17 +1,11 @@
 import socket
 import pyaudio
 
-CHUNK = 512
-FORMAT = pyaudio.paInt32
-CHANNELS = 2
+CHUNK = 16
+FORMAT = pyaudio.paInt16
+CHANNELS = 1
 RATE = 6000
 RECORD_SECONDS = 5
-
-HOST = 'localhost'    # The remote host
-PORT = 12000             # The same port as used by the server
-
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((HOST, PORT))
 
 p = pyaudio.PyAudio()
 
@@ -23,7 +17,6 @@ stream = p.open(format=FORMAT,
 
 stream.start_stream()
 
-
 def main():
     print("*_>recording")
 
@@ -34,8 +27,8 @@ def main():
             print e
             data = '\x00' * CHUNK
 
-        print data.encode("hex");
-        s.sendall(data)
+        ### send data here
+        # nrfsend(data)
 
     print("*_>done recording")
 
