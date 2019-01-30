@@ -5,7 +5,7 @@ CHUNK = 16
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 6000
-RECORD_SECONDS = 5
+RECORD_SECONDS = 10
 
 HOST = 'localhost'    # The remote host
 PORT = 12000             # The same port as used by the server
@@ -25,6 +25,7 @@ stream.start_stream()
 
 
 def main():
+    totalLength = 0
     print("*_>recording")
 
     for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
@@ -34,10 +35,12 @@ def main():
             print e
             data = '\x00' * CHUNK
 
-        print len(data)
+        # print len(data)
+        totalLength += len(data)
         s.sendall(data)
 
     print("*_>done recording")
+    print(totalLength)
 
     stream.stop_stream()
     stream.close()
