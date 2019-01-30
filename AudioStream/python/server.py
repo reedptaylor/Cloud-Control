@@ -4,15 +4,15 @@ import wave
 
 import pyaudio
 
-CHUNK = 512
-FORMAT = pyaudio.paFloat32
-CHANNELS = 2
-RATE = 44100
+CHUNK = 16
+FORMAT = pyaudio.paInt16
+CHANNELS = 1
+RATE = 6000
 WAVE_OUTPUT_FILENAME = "server_output.wav"
 WIDTH = 2
 
 HOST = 'localhost'     # Symbolic name meaning all available interfaces
-PORT = 50007              # Arbitrary non-privileged port
+PORT = 12000              # Arbitrary non-privileged port
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind((HOST, PORT))

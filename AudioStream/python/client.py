@@ -1,10 +1,10 @@
 import socket
 import pyaudio
 
-CHUNK = 512
-FORMAT = pyaudio.paFloat32
-CHANNELS = 2
-RATE = 44100
+CHUNK = 16
+FORMAT = pyaudio.paInt16
+CHANNELS = 1
+RATE = 6000
 RECORD_SECONDS = 5
 
 HOST = 'localhost'    # The remote host
@@ -34,7 +34,7 @@ def main():
             print e
             data = '\x00' * CHUNK
 
-        # print len(data)
+        print len(data)
         s.sendall(data)
 
     print("*_>done recording")
