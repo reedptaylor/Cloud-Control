@@ -1,10 +1,11 @@
-/*	DRV_SGTL_5000.h
+/*	
+*	DRV_SGTL_5000.h
 *	
 *	Provides definitions to be used in DRV_SGTL_5000.c 
 */
 
-#ifndef SGTL_5000_H
-#define SGTL_5000_H
+#ifndef DRV_SGTL_5000_H
+#define DRV_SGTL_5000_H
 
 /********** SGTL Registers **********/
 #define SGTL_CHIP_ID				(0x0000)
@@ -35,7 +36,7 @@
 */
 #define SGTL_CHIP_I2S_CTRL			(0x0006)
 #define I2S_CTRL_SCLKFREQ_MASK			(0x100)		// Sets frequency of I2S_SCLK when in master mode (MS=1). When in slave
-													// mode (MS=0), this field must be set appropriately to match SCLK input rate
+								// mode (MS=0), this field must be set appropriately to match SCLK input rate
 #define I2S_CTRL_SCLKFREQ_SHIFT			(0x8)
 //		0x0 = 64Fs, 0x1 = 32Fs - Not supported for RJ mode (I2S_MODE = 1)
 #define I2S_CTRL_MS_MASK			(0x80)		// Configures master or slave of I2S_LRCLK and I2S_SCLK.
