@@ -73,7 +73,7 @@
 //              0x1 = 32Fs - Not supported for RJ mode (I2S_MODE = 1)
 // 7
 #define SGTL5000_I2S_CTRL_MS_MASK			0x80      //Configures master or slave of I2S_LRCLK and I2S_SCLK.
-#define SGTL5000_I2S_CTRL_MS_SHIFT			0x0
+#define SGTL5000_I2S_CTRL_MS_SHIFT			0x7
 //              0x0 = Slave: I2S_LRCLK an I2S_SCLK are inputs
 //              0x1 = Master: I2S_LRCLK and I2S_SCLK are outputs
 //              NOTE: If the PLL is used (CHIP_CLK_CTRL->MCLK_FREQ==0x3),
