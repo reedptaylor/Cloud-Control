@@ -1,4 +1,3 @@
-import socket
 import pyaudio
 
 CHUNK = 16
@@ -27,6 +26,10 @@ def main():
             print e
             data = '\x00' * CHUNK
 
+        # PRINT THE DATA AS A 32-BYTE HEX STRING FOR DEBUGGING
+        # hexData = ":".join("{:02x}".format(ord(c)) for c in data)
+        # print hexData
+
         ### send data here
         # nrfsend(data)
 
@@ -35,7 +38,6 @@ def main():
     stream.stop_stream()
     stream.close()
     p.terminate()
-    s.close()
 
     print("*_>closed")
 
