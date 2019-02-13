@@ -21,3 +21,5 @@ void stopListening(void);
 void read(void* buf, uint8_t len);
 
 bool available(uint8_t* pipe_num);
+
+bool SetupNRF(void);

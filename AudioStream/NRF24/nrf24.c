@@ -298,7 +298,7 @@ bool SetupNRF(void)
 	Chip_SSP_SetFormat(LPC_SSP, ssp_format.bits, ssp_format.frameFormat, ssp_format.clockMode);
 	Chip_SSP_Enable(LPC_SSP);
 	Chip_SSP_SetMaster(LPC_SSP, 1);
-	Chip_SSP_SetBitRate(LPC_SSP, 6000000);
+	Chip_SSP_SetBitRate(LPC_SSP, 5000000);
 
 	xf_setup.length = BUFFER_SIZE;
 	xf_setup.tx_data = Tx_Buf;
