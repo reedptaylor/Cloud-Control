@@ -1,5 +1,6 @@
 import socket
 import pyaudio
+import time
 
 CHUNK = 16
 FORMAT = pyaudio.paInt16
@@ -8,18 +9,21 @@ RATE = 6000
 RECORD_SECONDS = 10
 
 HOST = 'localhost'    # The remote host
-PORT = 12000             # The same port as used by the server
-
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((HOST, PORT))
+PORT = 12001             # The same port as used by the server
 
 p = pyaudio.PyAudio()
+
+print p.get_device_info_by_index(0)['name'], p.get_device_info_by_index(0)['maxInputChannels']
 
 stream = p.open(format=FORMAT,
                 channels=CHANNELS,
                 rate=RATE,
                 input=True,
+                input_device_index = 1,
                 frames_per_buffer=CHUNK)
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((HOST, PORT))
 
 stream.start_stream()
 
@@ -31,9 +35,16 @@ def main():
     for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
         try:
             data = stream.read(CHUNK)
-        except Exception as e:
-            print e
-            data = '\x00' * CHUNK
+        except IOError as ex:
+            if ex[1] != pyaudio.paInputOverflowed:
+                stream.stop_stream()
+                time.sleep(2)
+                stream.close()
+                time.sleep(2)
+                p.terminate()
+                s.close()
+                raise
+            data = '\x00' * chunk
 
         # print len(data)
         totalLength += len(data)
@@ -43,7 +54,9 @@ def main():
     print(totalLength)
 
     stream.stop_stream()
+    time.sleep(2)
     stream.close()
+    time.sleep(2)
     p.terminate()
     s.close()
 

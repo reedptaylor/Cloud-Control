@@ -12,7 +12,7 @@ WAVE_OUTPUT_FILENAME = "server_output.wav"
 WIDTH = 2
 
 HOST = 'localhost'     # Symbolic name meaning all available interfaces
-PORT = 12000              # Arbitrary non-privileged port
+PORT = 12001              # Arbitrary non-privileged port
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind((HOST, PORT))
@@ -25,6 +25,7 @@ stream = p.open(format=p.get_format_from_width(WIDTH),
                 channels=CHANNELS,
                 rate=RATE,
                 output=True,
+                output_device_index = 1,
                 frames_per_buffer=CHUNK)
 q = Queue.Queue()
 

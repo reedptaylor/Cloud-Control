@@ -12,6 +12,7 @@ import sys
 from RF24 import *
 import RPi.GPIO as GPIO
 import pyaudio
+import time
 
 irq_gpio_pin = None
 
@@ -94,19 +95,21 @@ else:
 
 payload = 1
 
-CHUNK = 16
+CHUNK = 16 #256 ideal (512 bytes)
 FORMAT = pyaudio.paInt16
-CHANNELS = 2L
-RATE = 44100
-RECORD_SECONDS = 5
+CHANNELS = 1
+RATE = 6000
+RECORD_SECONDS = 1
 
 p = pyaudio.PyAudio()
+
+print(p.get_device_info_by_index(1)['name'], p.get_device_info_by_index(1))
 
 stream = p.open(format=FORMAT,
                 channels=CHANNELS,
                 rate=RATE,
                 input=True,
-                input_device_index = 0,
+                input_device_index = 1,
                 frames_per_buffer=CHUNK)
 
 stream.start_stream()
@@ -122,19 +125,30 @@ for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
 
         # Take the time, and send it.  This will block until complete
         try:
-            data = stream.read(CHUNK)
-        except Exception as e:
-            print(e)
-            data = '\x00' * CHUNK
+            data = stream.read(CHUNK, exception_on_overflow = False) #time consuming
+
+        except IOError as ex:
+            if ex[1] != pyaudio.paInputOverflowed:
+                # stream.stop_stream()
+                # time.sleep(2)
+                stream.close()
+                time.sleep(2)
+                p.terminate()
+                raise
+            data = '\x00' * chunk
 
         # print('Now sending  ' + str(send_payload[:16]) + " size: " + str(sys.getsizeof(send_payload[:16])))
         # result = radio.write(send_payload[:16])
         # print('Now sending  ' + str(data) + " size: " + str(sys.getsizeof(data)))
-        print('Now sending size: ' + str(sys.getsizeof(data)))
-        result = radio.write(data)
+        # print('Now sending size: ' + len(data))
+        # PRINT THE DATA AS A 32-BYTE HEX STRING FOR DEBUGGING
+        # print(hexData)
+        # hexData = ":".join("{:02x}".format(ord(c)) for c in (data))
+        # print(hexData)
 
-        if not result:
-            print("failed.")
+        result = radio.write(data)
+        # if not result:
+        #     print("failed.")
 
         payload += 1
 
@@ -153,5 +167,7 @@ for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
 print("*_>done recording")
 
 stream.stop_stream()
+time.sleep(2)
 stream.close()
+time.sleep(2)
 p.terminate()
