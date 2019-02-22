@@ -91,7 +91,7 @@
 #define SGTL_DAP_AUDIO_EQ_BAND1			(0x0118)
 #define SGTL_DAP_AUDIO_EQ_BAND2			(0x011A)
 #define SGTL_DAP_AUDIO_EQ_BAND3			(0x011C)
-#define SGTL_DAP_AUDIO_EQ_TREBLE_BAND4	(0x011E)
+#define SGTL_DAP_AUDIO_EQ_TREBLE_BAND4		(0x011E)
 #define SGTL_DAP_AVC_CTRL			(0x0124)
 #define SGTL_DAP_AVC_THRESHOLD			(0x0126)
 #define SGTL_DAP_AVC_ATTACK			(0x0128)
@@ -99,25 +99,58 @@
 #define SGTL_DAP_MAIN_CHAN			(0x0120)
 #define SGTL_DAP_CONTROL			(0x0100)
 
-/********** I2C Control Codes *********/
-//TODO
+/********** SGTL5000 Register Default Values *********/
+#define SGTL_REG_EVALCLK_DVAL		(0xF << 8 | 0x3 << 4 | 1 << 1)
+#define SGTL_REG_I2S_DVAL		0x0000
+#define SGTL_REG_PWRCTRL_DVAL		(1 << 15 | 1 << 13 | 1 << 10 | 1 << 8 | 1 << 6 | 1 << 4 | 0x0F) // fix
+#define SGTL_REG_HEADAMP_DVAL		(1 << 9 | 2)
+#define SGTL_REG_MSTRVOL_DVAL		0x0000
+#define SGTL_REG_ANAMIX_DVAL		0x0000
+#define SGTL_REG_MIXVOL_DVAL		0x0000
+#define SGTL_REG_MODEBBT_DVAL		0x0000
+#define SGTL_REG_MSTRMUTE_DVAL		(2 << 8 | 2)
+#define SGTL_REG_MIXSDO_DVAL		0x0000
 
-/********** I2C Bus Speed *********/
-//TODO
+/********** SGTL5000 Audio Input selection *********/
+#define SGTL_LINE_IN 	0		// LINE_IN_L in left stream, LINE_IN_R in right stream
+#define SGTL_MIC_IN_L	(1 << 2)	// MIC audio in Left stream, LINE_IN_R in right stream
+#define SGTL_MIC_IN_LR	(3 << 2)	// MIC audio in Left & Right stream
 
-/********** I2C Address Flags *********/
-//TODO
+/********** Some functions **********/
+#define SGTL_U8(val)	(((val) >> 8) & 0xFF), ((val) & 0xFF)
 
-/********** brief I2C Status **********/
-typedef volatile struct SGTL_CHIP_I2C_STATUS {
-  uint32_t busy             : 1;        ///< Busy flag
-  uint32_t mode             : 1;        ///< Mode: 0=Slave, 1=Master
-  uint32_t direction        : 1;        ///< Direction: 0=Transmitter, 1=Receiver
-  uint32_t general_call     : 1;        ///< General Call indication (cleared on start of next Slave operation)
-  uint32_t arbitration_lost : 1;        ///< Master lost arbitration (cleared on start of next Master operation)
-  uint32_t bus_error        : 1;        ///< Bus error detected (cleared on start of next Master/Slave operation)
-  uint32_t reserved         : 26;
-} SGTL_CHIP_I2C_STATUS;
+// Write a 16-bit value to codec's register
+void SGTL_REG_write(uint8_t reg, uint16_t val);
+
+// Read a 16-bit value from codec's register (reg)
+uint16_t SGTL_REG_read(uint8_t reg);
+
+// Write a value to chip register (reg), reads back and verifies value (val)
+int SGTL_REG_WriteVerify(uint8_t reg, uint16_t val);
+
+/* Write multiple values to codec's registers
+* @param buff : Pointer to buffer, buff[0] must be address of reg to which
+* 		the first data (ie. buff[1], buff[2]) be written, the next
+*		bytes buff[3],buff[4] be written to reg buff[0]+1 and so on
+* @param len  : Number of bytes in buff
+* @return 	1 on success, 0 on failure
+*/
+int SGTL_REG_WriteMulti(const uint8_t *buff, int len);
+
+/* Verify values in multiple codec registers
+* @param reg   : Starting register from which data be read
+* @param value : Pointer to memory which contains values to be compared
+* @param buff  : Pointer to memory to which data be read
+* @param len   : Length of bytes in value @a buff
+* @return 	1 on success & data is valid, 0 on failure
+*/
+int SGTL_REG_VerifyMult(uint8_t reg, const uint8_t *value, uint8_t *buff, int len);
+
+/* Initialize SGTL5000 to its default state
+* @param input : Audio input source (must be #SGTL_LINE_IN/#SGTL_MIC_IN_L/#SGTL_MIC_IN_LR)
+* @return	1 on success, 0 on failure
+*/
+int SGTL5000_Init(int input);	//TODO: EDIT
 
 /********** I2C Event *********/
 #define SGTL_CHIP_I2C_EVENT_TRANSFER_DONE       (1UL << 0)  ///< Master/Slave Transmit/Receive finished
@@ -130,25 +163,7 @@ typedef volatile struct SGTL_CHIP_I2C_STATUS {
 #define SGTL_CHIP_I2C_EVENT_BUS_ERROR           (1UL << 7)  ///< Bus error detected (START/STOP at illegal position)
 #define SGTL_CHIP_I2C_EVENT_BUS_CLEAR           (1UL << 8)  ///< Bus clear finished
 
-/********** Brief I2C Driver Capabilities **********/
-//TODO:EDIT
-typedef struct SGTL_CHIP_I2C_CAPABILITIES {
-  uint32_t address_10_bit : 1;          ///< supports 10-bit addressing
-  uint32_t reserved       : 31;         ///< Reserved (must be zero)
-} SGTL_CHIP_I2C_CAPABILITIES;
-
 /********** Brief Access structure of the I2C Driver **********/
 //TODO:EDIT
-typedef struct SGTL_CHIP_DRIVER_I2C {
-  SGTL_CHIP_I2C_CAPABILITIES	(*GetCapabilities)(void);                                                                ///< Pointer to \ref : Get driver capabilities.
-  int32_t			(*Initialize)     (ARM_I2C_SignalEvent_t cb_event);                                      ///< Pointer to \ref : Initialize I2C Interface.
-  int32_t			(*Uninitialize)   (void);                                                                ///< Pointer to \ref : De-initialize I2C Interface.
-  int32_t			(*PowerControl)   (ARM_POWER_STATE state);                                               ///< Pointer to \ref : Control I2C Interface Power.
-  int32_t			(*MasterTransmit) (uint32_t addr, const uint8_t *data, uint32_t num, bool xfer_pending); ///< Pointer to \ref : Start transmitting data as I2C Master.
-  int32_t			(*MasterReceive)  (uint32_t addr,       uint8_t *data, uint32_t num, bool xfer_pending); ///< Pointer to \ref : Start receiving data as I2C Master.
-  int32_t			(*SlaveTransmit)  (               const uint8_t *data, uint32_t num);                    ///< Pointer to \ref : Start transmitting data as I2C Slave.
-  int32_t			(*SlaveReceive)   (                     uint8_t *data, uint32_t num);                    ///< Pointer to \ref : Start receiving data as I2C Slave.
-  int32_t			(*GetDataCount)   (void);                                                                ///< Pointer to \ref : Get transferred data count.
-  int32_t			(*Control)        (uint32_t control, uint32_t arg);                                      ///< Pointer to \ref : Control I2C Interface.
-  SGTL_CHIP_I2C_STATUS		(*GetStatus)      (void);                                                                ///< Pointer to \ref : Get I2C status.
+                                                               ///< Pointer to \ref : Get I2C status.
 } const SGTL_CHIP_DRIVER_I2C;
