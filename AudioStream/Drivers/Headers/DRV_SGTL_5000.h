@@ -75,7 +75,7 @@
 #define SGTL_CHIP_LINREG_CTRL			(0x0026)
 #define SGTL_CHIP_REF_CTRL			(0x0028)
 #define SGTL_CHIP_MIC_CTRL			(0x002a)
-#define SGTL_CHIP_LINE_OUT_CTRL			(0x002c)
+#define SGTL_CHIP_LINE_OUT_CTRL			(0x002c)	//WE ARE USING LINEOUT, NOT ANA
 #define SGTL_CHIP_LINE_OUT_VOL			(0x002e)
 #define SGTL_CHIP_ANA_POWER			(0x0030)
 #define SGTL_CHIP_PLL_CTRL			(0x0032)
@@ -110,6 +110,21 @@
 #define SGTL_REG_MODEBBT_DVAL		0x0000
 #define SGTL_REG_MSTRMUTE_DVAL		(2 << 8 | 2)
 #define SGTL_REG_MIXSDO_DVAL		0x0000
+
+/********** Evaluation mode and clock setting register bits **********/
+#define EVCLK_EV2             (1 << 15)
+#define EVCLK_EV1             (1 << 14)
+#define EVCLK_EV0             (1 << 13)
+#define EVCLK_EN_ADC          (1 << 11)
+#define EVCLK_EN_DEC          (1 << 10)
+#define EVCLK_EN_DAC          (1 << 9)
+#define EVCLK_EN_INT          (1 << 8)
+#define EVCLK_ADC_CLK         (1 << 5)
+#define EVCLK_DAC_CLK         (1 << 4)
+#define EVCLK_SYS_DIV1        (1 << 3)
+#define EVCLK_SYS_DIV0        (1 << 2)
+#define EVCLK_PLL1            (1 << 1)
+#define EVCLK_PLL0            (1 << 0)
 
 /********** SGTL5000 Audio Input selection *********/
 #define SGTL_LINE_IN 	0		// LINE_IN_L in left stream, LINE_IN_R in right stream
