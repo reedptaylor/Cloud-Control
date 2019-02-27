@@ -110,6 +110,10 @@
 #define SGTL_REG_MODEBBT_DVAL		0x0000
 #define SGTL_REG_MSTRMUTE_DVAL		(2 << 8 | 2)
 #define SGTL_REG_MIXSDO_DVAL		0x0000
+#define SGTL_REG_DECVOL_DEFAULT_VALUE     0xE4E4	/* Decrease Volume -28dB */
+#define SGTL_REG_PGA_DEFAULT_VALUE        0x0000
+#define SGTL_REG_ADC_DEFAULT_VALUE        0x0001	/* Apply 0bB VGA Gain, enable DC Filter */
+#define SGTL_REG_AVC_DEFAULT_VALUE        0x0000	// this is AGC in UDA1380, auto gain control
 
 /********** Evaluation mode and clock setting register bits **********/
 #define EVCLK_EV2             (1 << 15)
