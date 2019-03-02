@@ -87,10 +87,19 @@ int SGTL_REG_VerifyMult(uint8_t reg, const uint8_t *value, uint8_t *buff, int le
 	return i == len;
 }
 
-int SGTL5000_Init(int input) {
-
-	// TODO
-
+int SGTL5000_I2C_Init(int input) {
+	I2C_EVENTHANDLER_T old = Chip_I2C_GetMasterEventHandler(SGTL_I2C_BUS);
+	int ret;
+	Board_I2C_Init(SGTL_I2C_BUS);
+	Chip_I2C_Init(SGTL_I2C_BUS);
+	Chip_I2C_SetClockRate(SGTL_I2C_BUS, 100000);
+	Chip_I2C_SetMasterEventHandler(SGTL_I2C_BUS, Chip_I2C_EventHandlerPolling);
+	
+	// RETURN VALUE TODO
+	
+	//TODO
+	Chip_I2C_SetMasterEventHandler(SGTL_I2C_BUS, old);
+	return ret;
 }
 	
 #ifdef  __cplusplus
