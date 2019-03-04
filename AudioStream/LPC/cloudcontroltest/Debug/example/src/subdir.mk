@@ -5,17 +5,20 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../example/src/cr_startup_lpc40xx.c \
-../example/src/i2s.c \
+../example/src/main.c \
+../example/src/nrf24.c \
 ../example/src/sysinit.c 
 
 OBJS += \
 ./example/src/cr_startup_lpc40xx.o \
-./example/src/i2s.o \
+./example/src/main.o \
+./example/src/nrf24.o \
 ./example/src/sysinit.o 
 
 C_DEPS += \
 ./example/src/cr_startup_lpc40xx.d \
-./example/src/i2s.d \
+./example/src/main.d \
+./example/src/nrf24.d \
 ./example/src/sysinit.d 
 
 

@@ -13,6 +13,7 @@ from RF24 import *
 import RPi.GPIO as GPIO
 import pyaudio
 import time
+import struct
 
 irq_gpio_pin = None
 
@@ -95,11 +96,11 @@ else:
 
 payload = 1
 
-CHUNK = 16 #256 ideal (512 bytes)
+CHUNK = 16
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
-RATE = 6000
-RECORD_SECONDS = 1
+RATE = 12000
+RECORD_SECONDS = 10
 
 p = pyaudio.PyAudio()
 
@@ -116,16 +117,17 @@ stream.start_stream()
 # print(p.get_device_info_by_index(0))
 
 print("*_>recording")
-for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
+# for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
+# for i in range(5):
+while(True):
     if inp_role == '1':   # ping out
-        # The payload will always be the same, what will change is how much of it we send.
 
         # First, stop listening so we can talk.
         radio.stopListening()
 
         # Take the time, and send it.  This will block until complete
         try:
-            data = stream.read(CHUNK, exception_on_overflow = False) #time consuming
+            data = stream.read(CHUNK, exception_on_overflow = False)
 
         except IOError as ex:
             if ex[1] != pyaudio.paInputOverflowed:
@@ -142,13 +144,14 @@ for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
         # print('Now sending  ' + str(data) + " size: " + str(sys.getsizeof(data)))
         # print('Now sending size: ' + len(data))
         # PRINT THE DATA AS A 32-BYTE HEX STRING FOR DEBUGGING
-        # print(hexData)
         # hexData = ":".join("{:02x}".format(ord(c)) for c in (data))
         # print(hexData)
+        # unsigned = struct.pack("I", data)
+        # print(unsigned)
 
-        result = radio.write(data)
-        # if not result:
-        #     print("failed.")
+        result = radio.write(data) #time consuming
+        if not result:
+            print("failed.")
 
         payload += 1
 

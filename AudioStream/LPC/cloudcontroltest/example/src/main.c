@@ -36,65 +36,6 @@
 /*****************************************************************************
  * Private types/enumerations/variables
  ****************************************************************************/
-#define SAVESIZE 16000
-
-static uint8_t send_flag;
-uint32_t polling_data = 0;
-uint32_t saveddata[SAVESIZE];
-int i = 0;
-int j = 0;
-
-/*****************************************************************************
- * Public types/enumerations/variables
- ****************************************************************************/
-
-
-
-/*****************************************************************************
- * Private functions
- ****************************************************************************/
-
-/* Polling routine for I2S example */
-static void App_Polling_Test(void)
-{
-	DEBUGOUT("I2S Polling mode\n\r");
-	while (1) {
-		if (Chip_I2S_GetRxLevel(LPC_I2S) > 0) {
-			polling_data = Chip_I2S_Receive(LPC_I2S);
-			if (i < SAVESIZE) {
-				saveddata[i] = polling_data;
-				i++;
-			}
-			else {
-				send_flag = 1;
-			}
-//			polling_data+=20;
-//			if (polling_data == 0xFFFF) {
-//				polling_data = 0;
-//			}
-//			send_flag = 1;
-		}
-		if ((Chip_I2S_GetTxLevel(LPC_I2S) < 4) && (send_flag == 1)) {
-			if (j < SAVESIZE) {
-				Chip_I2S_Send(LPC_I2S, saveddata[j]);
-				j++;
-			}
-			else {
-				j=0;
-				Chip_I2S_Send(LPC_I2S, saveddata[j]);
-			}
-//			Chip_I2S_Send(LPC_I2S, polling_data);
-//			printf("polling data: %d\n\r", polling_data);
-			send_flag = 0;
-		}
-	}
-}
-
-
-/*****************************************************************************
- * Public functions
- ****************************************************************************/
-
 
 /**
  * @brief  Main routine for I2S example
@@ -103,7 +44,7 @@ static void App_Polling_Test(void)
 int main(void)
 {
 	I2S_AUDIO_FORMAT_T audio_Confg;
-	audio_Confg.SampleRate = 6000;
+	audio_Confg.SampleRate = 6000; //half of sending speed
 	/* Select audio data is 2 channels (1 is mono, 2 is stereo) */
 	audio_Confg.ChannelNumber = 1;
 	/* Select audio data is 16 bits */
@@ -111,23 +52,41 @@ int main(void)
 
 	SystemCoreClockUpdate();
 	Board_Init();
+	SetupNRF();
 
 #if defined( __GNUC__ )
 	__sys_write(0, "", 0);
 #endif
 
+	const uint8_t pipes[][6] = {"1Node", "2Node"};
+	openWritingPipe(pipes[1]);
+	openReadingPipe(1, pipes[0]);
 
 	Board_Audio_Init(LPC_I2S, UDA1380_LINE_IN);
 	Chip_I2S_Init(LPC_I2S);
-	Chip_I2S_RxConfig(LPC_I2S, &audio_Confg);
 	Chip_I2S_TxConfig(LPC_I2S, &audio_Confg);
 
 	Chip_I2S_TxStop(LPC_I2S);
 	Chip_I2S_DisableMute(LPC_I2S);
 	Chip_I2S_TxStart(LPC_I2S);
-	send_flag = 0;
-	while (1) {
-		App_Polling_Test();
+
+	startListening();
+	int loop = 0;
+
+	uint32_t read_payload[8];
+	while(1) {
+		if (available(NULL))
+		{
+			read(&read_payload, sizeof(uint32_t)*8);
+			loop = 0;
+			while (loop < 8) {
+				if (Chip_I2S_GetTxLevel(LPC_I2S) < 4) {
+					Chip_I2S_Send(LPC_I2S, read_payload[loop]);
+					loop++;
+				}
+			}
+		}
 	}
+
 	return 0;
 }

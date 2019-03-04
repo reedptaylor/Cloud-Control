@@ -5,7 +5,7 @@
  * Generated linker script file for LPC4088
  * Created from linkscript.ldt by FMCreateLinkLibraries
  * Using Freemarker v2.3.23
- * LPCXpresso v8.2.2 [Build 650] [2016-09-09]  on Jan 16, 2019 12:49:39 PM
+ * LPCXpresso v8.2.2 [Build 650] [2016-09-09]  on Mar 1, 2019 2:46:34 PM
  */
 
 INCLUDE "periph_i2s_Debug_library.ld"
