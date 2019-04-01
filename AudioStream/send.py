@@ -7,8 +7,140 @@ import sys
 from RF24 import *
 import RPi.GPIO as GPIO
 import pyaudio
-import time
 import struct
+from Tkinter import *
+import thread
+
+stopRecording = True
+failedPackets = 0
+
+def startRecording():
+    global radio
+    global failedPackets
+    global app
+    # forever loop
+
+    payload = 1
+
+    CHUNK = 16
+    FORMAT = pyaudio.paInt16
+    CHANNELS = 1
+    RATE = 12000
+    RECORD_SECONDS = 10
+
+    p = pyaudio.PyAudio()
+    # print(p.get_device_info_by_index(1)['name'], p.get_device_info_by_index(1))
+
+    stream = p.open(format=FORMAT,
+                    channels=CHANNELS,
+                    rate=RATE,
+                    input=True,
+                    input_device_index = 1,
+                    frames_per_buffer=CHUNK)
+
+    stream.start_stream()
+    # print(p.get_device_info_by_index(0))
+
+    print("*_>recording")
+    while(True):
+
+        # First, stop listening so we can talk.
+        radio.stopListening()
+
+        if (not stopRecording):
+            # Take the time, and send it.  This will block until complete
+            try:
+                data = stream.read(CHUNK, exception_on_overflow = False)
+
+            except IOError as ex:
+                if ex[1] != pyaudio.paInputOverflowed:
+                    stream.close()
+                    p.terminate()
+                    raise
+                data = '\x00' * chunk
+
+            # print('Now sending size: ' + len(data))
+            ## PRINT THE DATA AS A 32-BYTE HEX STRING FOR DEBUGGING
+            # hexData = ":".join("{:02x}".format(ord(c)) for c in (data))
+            # print(hexData)
+
+            result = radio.write(data) #time consuming
+            if not result:
+                # print("failed.")
+                failedPackets = failedPackets + 1
+                app.setFailed()
+
+            payload += 1
+        else:
+            print("*_>done recording")
+            stream.stop_stream()
+            stream.close()
+            p.terminate()
+            return
+
+
+class Application(Frame):
+
+    def start_recording(self):
+        global failedPackets
+        global stopRecording
+        stopRecording = False
+        failedPackets = 0
+        self.failed["text"] = "Failed packets: " + str(failedPackets)
+        thread.start_new_thread(startRecording, ())
+        self.record["text"] = "Stop recording"
+        self.record["command"] = self.stop_recording
+
+    def stop_recording(self):
+        global stopRecording
+        stopRecording = True
+        self.record["text"] = "Start recording"
+        self.record["command"] = self.start_recording
+
+    def createWidgets(self):
+        global failedPackets
+        self.QUIT = Button(self)
+        self.QUIT["text"] = "QUIT"
+        self.QUIT["fg"]   = "red"
+        self.QUIT["command"] =  self.quit
+        self.QUIT["height"] = 2
+        self.QUIT["width"] = 6
+        self.QUIT.config(font=("Lato", 20))
+        self.QUIT.grid(row=2,column=1)
+
+        self.record = Button(self)
+        self.record["text"] = "Start recording"
+        self.record["command"] = self.start_recording
+        self.record["height"] = 7
+        self.record["width"] = 20
+        self.record.config(font=("Lato", 25))
+        self.record.grid(row=0,column=0)
+
+        self.failed = Label(self)
+        self.failed["text"] = "Failed packets: " + str(failedPackets)
+        self.failed.config(font=("Lato", 15))
+        self.failed.grid(row=2,column=0)
+
+        self.failed = Label(self)
+        self.failed["text"] = "Failed packets: " + str(failedPackets)
+        self.failed.config(font=("Lato", 15))
+        self.failed.grid(row=2,column=0)
+
+        self.logo = PhotoImage(file="/home/pi/Desktop/Cloud-Control/logo/CloudControl.png")
+        self.logo = self.logo.subsample(6, 6)
+        self.logolabel = Label(self, image=self.logo)
+        self.logolabel.config(background='#B8D7FD')
+        self.logolabel.grid(row=0,column=1)
+
+    def setFailed(self):
+        global failedPackets
+        self.failed["text"] = "Failed packets: " + str(failedPackets)
+
+    def __init__(self, master=None):
+        Frame.__init__(self, master)
+        self.pack()
+        self.createWidgets()
+
 
 irq_gpio_pin = None
 
@@ -69,66 +201,9 @@ radio.printDetails()
 radio.openWritingPipe(pipes[0])
 radio.openReadingPipe(1,pipes[1])
 
-# forever loop
-
-payload = 1
-
-CHUNK = 16
-FORMAT = pyaudio.paInt16
-CHANNELS = 1
-RATE = 12000
-RECORD_SECONDS = 10
-
-p = pyaudio.PyAudio()
-# print(p.get_device_info_by_index(1)['name'], p.get_device_info_by_index(1))
-
-stream = p.open(format=FORMAT,
-                channels=CHANNELS,
-                rate=RATE,
-                input=True,
-                input_device_index = 1,
-                frames_per_buffer=CHUNK)
-
-stream.start_stream()
-# print(p.get_device_info_by_index(0))
-
-print("*_>recording")
-# for i in range(5):
-while(True):
-
-    # First, stop listening so we can talk.
-    radio.stopListening()
-
-    # Take the time, and send it.  This will block until complete
-    try:
-        data = stream.read(CHUNK, exception_on_overflow = False)
-
-    except IOError as ex:
-        if ex[1] != pyaudio.paInputOverflowed:
-            # stream.stop_stream()
-            # time.sleep(2)
-            stream.close()
-            time.sleep(2)
-            p.terminate()
-            raise
-        data = '\x00' * chunk
-
-    # print('Now sending size: ' + len(data))
-    ## PRINT THE DATA AS A 32-BYTE HEX STRING FOR DEBUGGING
-    # hexData = ":".join("{:02x}".format(ord(c)) for c in (data))
-    # print(hexData)
-
-    result = radio.write(data) #time consuming
-    if not result:
-        print("failed.")
-
-    payload += 1
-
-
-print("*_>done recording")
-
-stream.stop_stream()
-time.sleep(2)
-stream.close()
-time.sleep(2)
-p.terminate()
+root = Tk()
+root.attributes("-fullscreen", True)
+root.configure(background='#B8D7FD')
+app = Application(master=root)
+app.mainloop()
+root.destroy()
