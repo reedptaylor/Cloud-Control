@@ -1,0 +1,24 @@
+{
+    "Header": {
+        "Comment": "All values are metric (mm)",
+        "CreationDate": "2019-04-01T23:08:26Z",
+        "GenerationSoftware": {
+            "Application": "EAGLE",
+            "Vendor": "Autodesk",
+            "Version": "9.2.1"
+        },
+        "Part": "Single"
+    },
+    "Overall": {
+        "BoardThickness": 1.4276,
+        "LayerNumber": 4,
+        "Name": {
+            "ProjectId": "Schematic"
+        },
+        "Owner": "Reed Taylor <rtaylor@ucsb.edu>",
+        "Size": {
+            "X": 57.13,
+            "Y": 61.9
+        }
+    }
+}

@@ -5,7 +5,7 @@
  * Generated linker script file for LPC4088
  * Created from library.ldt by FMCreateLinkLibraries
  * Using Freemarker v2.3.23
- * LPCXpresso v8.2.2 [Build 650] [2016-09-09]  on Mar 1, 2019 2:46:34 PM
+ * LPCXpresso v8.2.2 [Build 650] [2016-09-09]  on Mar 13, 2019 1:41:48 PM
  */
 
 GROUP (
