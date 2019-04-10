@@ -8,6 +8,7 @@
 #define DRV_SGTL_5000_H
 
 /********** SGTL Registers **********/
+#define SGTL_I2C_ADDR				(0xA)
 #define SGTL_CHIP_ID				(0x0000)
 #define SGTL_CHIP_DIG_PWR			(0x0002)
 /*
