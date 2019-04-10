@@ -7,6 +7,7 @@ extern "C"
 #endif
 
 #include "chip.h"
+#include "chip_lpc407x_8x.h"
 
 /* DEFAULT SGTL5000 VALUES */
 /* System Register Data Set */
@@ -52,12 +53,12 @@ void SGTL_REG_Write(uint8_t reg, uint16_t val) {
 	dat[0] = reg;
 	dat[1] = val >> 8;
 	dat[2] = val & 0xFF;
-	Chip_I2C_MasterSend(SGTL_I2C_BUS, SGTL_I2C_ADDR, dat, sizeof(dat));	//TODO
+	Chip_I2C_MasterSend(LPC_I2C0, SGTL_I2C_ADDR, dat, sizeof(dat));	//TODO
 }
 
 void SGTL_REG_Read(uint8_t reg) {
 	uint8_t rx_data[2];
-	if (Chip_I2C_MasterCmdRead(SGTL_I2C_BUS, SGTL_I2C_ADDR, reg, rx_data, 2) == 2) {	//TODO
+	if (Chip_I2C_MasterCmdRead(LPC_I2C0, SGTL_I2C_ADDR, reg, rx_data, 2) == 2) {	//TODO
 		return (rx_data[0] << 8) | rx_data[1];
 	}
 	return 0;
@@ -71,12 +72,12 @@ int SGTL_REG_WriteVerify(uint8_t reg, uint16_t val) {
 }
 
 int SGTL_REG_WriteMult(const uint8_t *buff, int len) {
-	return Chip_I2C_MasterSend(SGTL_I2C_BUS, SGTL_I2C_ADDR, buff, len) == len;	//TODO
+	return Chip_I2C_MasterSend(LPC_I2C0, SGTL_I2C_ADDR, buff, len) == len;	//TODO
 }
 	
 int SGTL_REG_VerifyMult(uint8_t reg, const uint8_t *value, uint8_t *buff, int len) {
 	int i;
-	if (Chip_I2C_MasterCmdRead(SGTL_I2C_BUS, SGTL_I2C_ADDR, reg, buff, len) != len) {	//TODO
+	if (Chip_I2C_MasterCmdRead(LPC_I2C0, SGTL_I2C_ADDR, reg, buff, len) != len) {	//TODO
 		return 0;	// partial read
 	}
 	for (i = 0; i < len; i++) {
@@ -88,12 +89,12 @@ int SGTL_REG_VerifyMult(uint8_t reg, const uint8_t *value, uint8_t *buff, int le
 }
 
 int SGTL5000_I2C_Init(int input) {
-	I2C_EVENTHANDLER_T old = Chip_I2C_GetMasterEventHandler(SGTL_I2C_BUS);
+	I2C_EVENTHANDLER_T old = Chip_I2C_GetMasterEventHandler(LPC_I2C0);
 	int ret;
-	Board_I2C_Init(SGTL_I2C_BUS);
-	Chip_I2C_Init(SGTL_I2C_BUS);
-	Chip_I2C_SetClockRate(SGTL_I2C_BUS, 100000);
-	Chip_I2C_SetMasterEventHandler(SGTL_I2C_BUS, Chip_I2C_EventHandlerPolling);
+	Board_I2C_Init(LPC_I2C0);
+	Chip_I2C_Init(LPC_I2C0);
+	Chip_I2C_SetClockRate(LPC_I2C0, 100000);
+	Chip_I2C_SetMasterEventHandler(LPC_I2C0, Chip_I2C_EventHandlerPolling);
 	
 	ret = SGTL_5000_SetDefaultValues(SGTL_sys_regs_dat, sizeof(SGTL_sys_regs_dat));
 	if (ret) {
@@ -103,7 +104,7 @@ int SGTL5000_I2C_Init(int input) {
 		ret = SGTL_5000_SetDefaultValues(SGTL_decimator_regs_dat, sizeof(SGTL_decimator_regs_dat));
 	}
 	
-	Chip_I2C_SetMasterEventHandler(SGTL_I2C_BUS, old);
+	Chip_I2C_SetMasterEventHandler(LPC_I2C0, old);
 	return ret;
 }
 	
