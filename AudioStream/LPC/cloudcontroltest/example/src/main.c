@@ -37,6 +37,12 @@
  * Private types/enumerations/variables
  ****************************************************************************/
 
+void SystemInit(void)
+{
+	Board_SetupMuxing();
+	Chip_SetupIrcClocking();
+}
+
 /**
  * @brief  Main routine for I2S example
  * @return Nothing

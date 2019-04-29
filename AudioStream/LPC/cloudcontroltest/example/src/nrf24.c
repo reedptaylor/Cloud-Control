@@ -282,6 +282,10 @@ bool SetupNRF(void)
 	Board_SSP_Init(LPC_SSP);
 	Chip_SSP_Init(LPC_SSP);
 
+	Chip_IOCON_PinMux(LPC_IOCON, CLK_PORT, CLK_PIN, IOCON_FUNC4, IOCON_MODE_PULLUP);
+	Chip_IOCON_PinMux(LPC_IOCON, MOSI_PORT, MOSI_PIN, IOCON_FUNC4, IOCON_MODE_PULLUP);
+	Chip_IOCON_PinMux(LPC_IOCON, MISO_PORT, MISO_PIN, IOCON_FUNC4, IOCON_MODE_PULLUP);
+
 	ssp_format.frameFormat = SSP_FRAMEFORMAT_SPI;
 	ssp_format.bits = SSP_DATA_BITS;
 	ssp_format.clockMode = SSP_CLOCK_MODE1;
@@ -302,10 +306,6 @@ bool SetupNRF(void)
 	Chip_GPIO_SetPinDIROutput(LPC_GPIO, CE_PORT, CE_PIN);
 	ce(false);
 	csn(true);
-
-	//MISO Pin set correctly for SSP1 usage
-	if (LPC_SSP == LPC_SSP1)
-		Chip_IOCON_PinMux(LPC_IOCON, MISO_PORT, MISO_PIN, IOCON_FUNC2, IOCON_MODE_PULLUP);
 
 	// Must allow the radio time to settle else configuration bits will not necessarily stick.
 	// This is actually only required following power up but some settling time also appears to
