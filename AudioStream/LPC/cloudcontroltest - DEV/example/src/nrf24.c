@@ -98,7 +98,6 @@ uint8_t transferSSPData (uint8_t data)
 	Tx_Buf[0] = data;
 
 	Chip_SSP_RWFrames_Blocking(LPC_SSP, &xf_setup);
-	printf("Wrote: 0x%x Read: 0x%x\n", Tx_Buf[0], Rx_Buf[0]);
 	return Rx_Buf[0];
 }
 
@@ -279,13 +278,18 @@ bool SetupNRF(void)
 {
 	uint8_t setup = 0;
 
+	//GPIO pins configured to simulate CSN and CE
+	Chip_IOCON_PinMux(LPC_IOCON, CSN_PORT, CSN_PIN, IOCON_FUNC0, IOCON_MODE_PULLUP);
+	Chip_GPIO_SetPinDIROutput(LPC_GPIO, CSN_PORT, CSN_PIN);
+	Chip_IOCON_PinMux(LPC_IOCON, CE_PORT, CE_PIN, IOCON_FUNC0, IOCON_MODE_PULLUP);
+	Chip_GPIO_SetPinDIROutput(LPC_GPIO, CE_PORT, CE_PIN);
+
+	ce(false);
+	csn(true);
+
 	//Setup SSP interface
 	Board_SSP_Init(LPC_SSP);
 	Chip_SSP_Init(LPC_SSP);
-
-	Chip_IOCON_PinMux(LPC_IOCON, CLK_PORT, CLK_PIN, IOCON_FUNC4, IOCON_MODE_PULLUP);
-	Chip_IOCON_PinMux(LPC_IOCON, MOSI_PORT, MOSI_PIN, IOCON_FUNC4, IOCON_MODE_PULLUP);
-	Chip_IOCON_PinMux(LPC_IOCON, MISO_PORT, MISO_PIN, IOCON_FUNC4, IOCON_MODE_PULLUP);
 
 	ssp_format.frameFormat = SSP_FRAMEFORMAT_SPI;
 	ssp_format.bits = SSP_DATA_BITS;
@@ -294,19 +298,11 @@ bool SetupNRF(void)
 	Chip_SSP_SetFormat(LPC_SSP, ssp_format.bits, ssp_format.frameFormat, ssp_format.clockMode);
 	Chip_SSP_Enable(LPC_SSP);
 	Chip_SSP_SetMaster(LPC_SSP, 1);
-	Chip_SSP_SetBitRate(LPC_SSP, SSP_BITRATE);
+	Chip_SSP_SetBitRate(LPC_SSP, 5000000);
 
 	xf_setup.length = BUFFER_SIZE;
 	xf_setup.tx_data = Tx_Buf;
 	xf_setup.rx_data = Rx_Buf;
-
-	//GPIO pins configured to simulate CSN and CE
-	Chip_IOCON_PinMux(LPC_IOCON, CSN_PORT, CSN_PIN, IOCON_FUNC0, IOCON_MODE_PULLUP);
-	Chip_GPIO_SetPinDIROutput(LPC_GPIO, CSN_PORT, CSN_PIN);
-	Chip_IOCON_PinMux(LPC_IOCON, CE_PORT, CE_PIN, IOCON_FUNC0, IOCON_MODE_PULLUP);
-	Chip_GPIO_SetPinDIROutput(LPC_GPIO, CE_PORT, CE_PIN);
-	ce(false);
-	csn(true);
 
 	// Must allow the radio time to settle else configuration bits will not necessarily stick.
 	// This is actually only required following power up but some settling time also appears to

@@ -32,16 +32,11 @@
 
 #include "board.h"
 #include "uda1380.h"
+#include "nrf24.h"
 
 /*****************************************************************************
  * Private types/enumerations/variables
  ****************************************************************************/
-
-void SystemInit(void)
-{
-	Board_SetupMuxing();
-	Chip_SetupIrcClocking();
-}
 
 /**
  * @brief  Main routine for I2S example
@@ -68,28 +63,32 @@ int main(void)
 	openWritingPipe(pipes[1]);
 	openReadingPipe(1, pipes[0]);
 
-//	Board_Audio_Init(LPC_I2S, UDA1380_LINE_IN);
-//	Chip_I2S_Init(LPC_I2S);
-//	Chip_I2S_TxConfig(LPC_I2S, &audio_Confg);
-//
-//	Chip_I2S_TxStop(LPC_I2S);
-//	Chip_I2S_DisableMute(LPC_I2S);
-//	Chip_I2S_TxStart(LPC_I2S);
+	Board_Audio_Init(LPC_I2S, UDA1380_LINE_IN);
+	Chip_I2S_Init(LPC_I2S);
+	Chip_I2S_TxConfig(LPC_I2S, &audio_Confg);
+
+	Chip_IOCON_PinMux(LPC_GPIO, GPIOINT_PORT2, 10, IOCON_FUNC0, IOCON_MODE_PULLUP);	// Configures pin as GPIO w/ pullup resistor
+	Chip_GPIO_SetPinDIRInput(LPC_GPIO, GPIOINT_PORT2, 10);  // Configures pin as an input
+
+	Chip_I2S_TxStop(LPC_I2S);
+	Chip_I2S_DisableMute(LPC_I2S);
+	Chip_I2S_TxStart(LPC_I2S);
 
 	startListening();
 	int loop = 0;
 
 	uint32_t read_payload[8];
+
 	while(1) {
 		if (available(NULL))
 		{
 			read(&read_payload, sizeof(uint32_t)*8);
 			loop = 0;
 			while (loop < 8) {
-//				if (Chip_I2S_GetTxLevel(LPC_I2S) < 4) {
-//					Chip_I2S_Send(LPC_I2S, read_payload[loop]);
+				if (Chip_I2S_GetTxLevel(LPC_I2S) < 4) {
+					Chip_I2S_Send(LPC_I2S, read_payload[loop]);
 					loop++;
-//				}
+				}
 			}
 		}
 	}
