@@ -53,7 +53,7 @@
 							<tool id="com.crt.advproject.link.exe.debug.2438394" name="MCU Linker" superClass="com.crt.advproject.link.exe.debug">
 								<option id="com.crt.advproject.link.arch.858475274" name="Architecture" superClass="com.crt.advproject.link.arch" value="com.crt.advproject.link.target.cm4" valueType="enumerated"/>
 								<option id="com.crt.advproject.link.thumb.72848407" name="Thumb mode" superClass="com.crt.advproject.link.thumb" value="true" valueType="boolean"/>
-								<option id="com.crt.advproject.link.script.1393902423" name="Linker script" superClass="com.crt.advproject.link.script" value="&quot;periph_i2s_Debug.ld&quot;" valueType="string"/>
+								<option id="com.crt.advproject.link.script.1393902423" name="Linker script" superClass="com.crt.advproject.link.script" value="&quot;cloudcontrol_dev_Debug.ld&quot;" valueType="string"/>
 								<option id="com.crt.advproject.link.manage.1634529835" name="Manage linker script" superClass="com.crt.advproject.link.manage" value="true" valueType="boolean"/>
 								<option id="gnu.c.link.option.nostdlibs.1087734304" name="No startup or default libs (-nostdlib)" superClass="gnu.c.link.option.nostdlibs" value="true" valueType="boolean"/>
 								<option id="gnu.c.link.option.other.930744539" name="Other options (-Xlinker [option])" superClass="gnu.c.link.option.other" valueType="stringList">
@@ -138,7 +138,7 @@
 							<tool id="com.crt.advproject.link.exe.release.1279513662" name="MCU Linker" superClass="com.crt.advproject.link.exe.release">
 								<option id="com.crt.advproject.link.arch.2022842648" name="Architecture" superClass="com.crt.advproject.link.arch" value="com.crt.advproject.link.target.cm4" valueType="enumerated"/>
 								<option id="com.crt.advproject.link.thumb.948487137" name="Thumb mode" superClass="com.crt.advproject.link.thumb" value="true" valueType="boolean"/>
-								<option id="com.crt.advproject.link.script.1790938303" name="Linker script" superClass="com.crt.advproject.link.script" value="&quot;periph_i2s_Release.ld&quot;" valueType="string"/>
+								<option id="com.crt.advproject.link.script.1790938303" name="Linker script" superClass="com.crt.advproject.link.script" value="&quot;cloudcontrol_dev_Release.ld&quot;" valueType="string"/>
 								<option id="com.crt.advproject.link.manage.694287557" name="Manage linker script" superClass="com.crt.advproject.link.manage" value="true" valueType="boolean"/>
 								<option id="gnu.c.link.option.nostdlibs.26893960" name="No startup or default libs (-nostdlib)" superClass="gnu.c.link.option.nostdlibs" value="true" valueType="boolean"/>
 								<option id="gnu.c.link.option.other.807517562" name="Other options (-Xlinker [option])" superClass="gnu.c.link.option.other" valueType="stringList">

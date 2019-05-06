@@ -4,8 +4,9 @@
     <string name="stop_recording">Stop Recording</string>
     <string name="drone_connection">Drone Uplink:</string>
     <string name="rpi_connection">GCS Uplink:</string>
-    <string name="packets">Failed Packets:</string>
+    <string name="packets">Failed Packets: 0</string>
     <string name="welcome">Welcome to the CloudControl base station application!
         To begin recording, press the start recording option and press again to stop.
-        The failed packets counter shows any drops in communication and Uplink status shows if the drone unit or GCS is connected.</string>
+        The failed packets counter shows any drops in communication and Uplink status shows if the drone unit or GCS is connected.
+        If the GCS Uplink is down, tap it\'s status indicator to try resetting the connection.</string>
 </resources>

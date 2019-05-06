@@ -8,18 +8,18 @@ CHANNELS = 1
 RATE = 6000
 RECORD_SECONDS = 10
 
-HOST = 'localhost'    # The remote host
+HOST = '192.168.42.1'    # The remote host
 PORT = 12001             # The same port as used by the server
 
 p = pyaudio.PyAudio()
 
-print p.get_device_info_by_index(0)['name'], p.get_device_info_by_index(0)['maxInputChannels']
+print p.get_device_info_by_index(1)['name'], p.get_device_info_by_index(1)['maxInputChannels']
 
 stream = p.open(format=FORMAT,
                 channels=CHANNELS,
                 rate=RATE,
                 input=True,
-                input_device_index = 1,
+                input_device_index = 0,
                 frames_per_buffer=CHUNK)
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

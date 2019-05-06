@@ -10,17 +10,21 @@ import pyaudio
 import struct
 from Tkinter import *
 import thread
+from socket import *
 
 stopRecording = True
 failedPackets = 0
 connectionPackets = 0
+drone = False
 DOWNLINK_COUNT = 5
+connectionSocket = None
 
 def startRecording():
     global radio
     global failedPackets
     global connectionPackets
     global app
+    global connectionSocket
 
     payload = 1
 
@@ -43,6 +47,12 @@ def startRecording():
     # print(p.get_device_info_by_index(0))
 
     print("*_>recording")
+
+    try:
+        connectionSocket.send("00\0\n")
+    except:
+        connectionSocket = None
+
     while(True):
 
         # First, stop listening so we can talk.
@@ -90,6 +100,12 @@ def notRecording():
     global radio
     global connectionPackets
     global app
+    global connectionSocket
+
+    try:
+        connectionSocket.send("01\0\n")
+    except:
+        pass
 
     while(stopRecording):
         radio.stopListening()
@@ -105,6 +121,59 @@ def notRecording():
 
 
 class Application(Frame):
+
+    def server(self):
+        global connectionSocket
+        serverSocket = socket(AF_INET, SOCK_STREAM)
+        serverSocket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
+        serverSocket.bind(('', 12001))
+        serverSocket.listen(5)
+        while True:
+            connectionSocket, addr = serverSocket.accept()
+            print("client connected @", addr, " ", connectionSocket)
+            connectionSocket.send("04\0\n")
+            if (stopRecording):
+                connectionSocket.send("01\0\n")
+            else:
+                connectionSocket.send("00\0\n")
+            app.setRUp()
+            app.sendDroneStatus()
+            thread.start_new_thread(app.clientRecieve, (connectionSocket, addr))
+
+    def clientRecieve(self, connectionSocket, addr):
+        while True:
+            clientMessage = connectionSocket.recv(1024)
+            app.setRUp()
+            if (clientMessage[0:2] == "10"):
+                app.start_recording()
+            elif (clientMessage[0:2] == "11"):
+                app.stop_recording()
+            elif (clientMessage[0:2] == "15"):
+                break;
+            else:
+                break;
+        connectionSocket.close()
+        connectionSocket = None
+        app.setRDown()
+
+    def sendDroneStatus(self):
+        global connectionSocket
+        try:
+            if (drone):
+                connectionSocket.send("021\0\n")
+            else:
+                connectionSocket.send("020\0\n")
+        except:
+            connectionSocket = None
+            app.setRDown()
+
+    def sendPacketCount(self):
+        global connectionSocket, failedPackets
+        try:
+            connectionSocket.send("03" + str(failedPackets) + "\0\n")
+        except:
+            connectionSocket = None
+            app.setRDown()
 
     def start_recording(self):
         global failedPackets
@@ -133,7 +202,7 @@ class Application(Frame):
         self.QUIT["command"] =  self.quit
         self.QUIT["height"] = 2
         self.QUIT.config(font=("Lato", 20), background='#B8D7FD', activebackground='#B8D7FD')
-        self.QUIT.grid(row=3,column=2, sticky=N+S+E+W)
+        self.QUIT.grid(row=4,column=2, sticky=N+S+E+W)
 
         self.square = PhotoImage(file="/home/pi/Desktop/Cloud-Control/AudioStream/red.png")
         self.square = self.square.subsample(4, 4)
@@ -149,26 +218,31 @@ class Application(Frame):
         self.record["height"] = 310
         self.record["width"] = 310
         self.record.config(font=("Lato", 25), relief=FLAT)
-        self.record.grid(row=1,column=0, rowspan=2, sticky=N+S+E+W)
+        self.record.grid(row=1,column=0, rowspan=3, sticky=N+S+E+W)
 
         self.failed = Label(self)
         self.failed["text"] = "Failed packets: " + str(failedPackets)
         self.failed.config(font=("Lato", 18), background='#B8D7FD')
-        self.failed.grid(row=1,column=1, columnspan=2, sticky=N+S+E+W)
+        self.failed.grid(row=3,column=1, columnspan=2, sticky=N+S+E+W)
 
         self.desciption = Text(self)
         self.desciption.tag_configure("center", justify='center')
-        self.desciption.insert(INSERT, "Welcome to the CloudControl base station application! To begin recording, press the start recording option and press again to stop. The failed packets counter shows any drops in communication and Uplink status shows if the drone unit is connected.")
+        self.desciption.insert(INSERT, "Welcome to the CloudControl base station application! To begin recording, press the start recording option and press again to stop. The failed packets counter shows any drops in communication and Drone Uplink shows if the drone unit is connected. The Remote Uplink shows if Android remote is connected.")
         self.desciption.tag_add("center", "1.0", "end")
         self.desciption["height"] = 1
         self.desciption["width"] = 55
         self.desciption.config(font=("Lato", 18), background='#B8D7FD', pady=100, padx=10, state=DISABLED,wrap=WORD, exportselection=0, relief=FLAT)
         self.desciption.grid(row=0,column=0, sticky=N+S+E+W)
 
-        self.connection = Label(self)
-        self.connection["text"] = "Uplink Status:"
-        self.connection.config(font=("Lato", 18), background='#B8D7FD')
-        self.connection.grid(row=2,column=1, columnspan=2, sticky=N+S+E+W)
+        self.connectiond = Label(self)
+        self.connectiond["text"] = "Drone Uplink:"
+        self.connectiond.config(font=("Lato", 18), background='#B8D7FD')
+        self.connectiond.grid(row=2,column=1, columnspan=2, sticky=N+S+E+W)
+
+        self.connectionr = Label(self)
+        self.connectionr["text"] = "Remote Uplink:"
+        self.connectionr.config(font=("Lato", 18), background='#B8D7FD')
+        self.connectionr.grid(row=1,column=1, columnspan=2, sticky=N+S+E+W)
 
         self.logo = PhotoImage(file="/home/pi/Desktop/Cloud-Control/logo/CloudControl.png")
         self.logo = self.logo.subsample(6, 6)
@@ -178,19 +252,34 @@ class Application(Frame):
 
         self.spacer = Label(self)
         self.spacer.config(background='#B8D7FD')
-        self.spacer.grid(row=3,column=0, columnspan=2, sticky=N+S+E+W)
+        self.spacer.grid(row=4,column=0, columnspan=2, sticky=N+S+E+W)
 
     def setFailed(self):
         global failedPackets
         self.failed["text"] = "Failed packets: " + str(failedPackets)
+        self.sendPacketCount()
 
     def setUp(self):
-        self.connection["text"] = "Uplink Status: Up"
-        self.connection.configure(foreground="green")
+        global drone
+        drone = True
+        self.connectiond["text"] = "Drone Uplink: Up"
+        self.connectiond.configure(foreground="green")
+        self.sendDroneStatus()
 
     def setDown(self):
-        self.connection["text"] = "Uplink Status: Down"
-        self.connection.configure(foreground="red")
+        global drone
+        drone = False
+        self.connectiond["text"] = "Drone Uplink: Down"
+        self.connectiond.configure(foreground="red")
+        self.sendDroneStatus()
+
+    def setRUp(self):
+        self.connectionr["text"] = "Remote Uplink: Up"
+        self.connectionr.configure(foreground="green")
+
+    def setRDown(self):
+        self.connectionr["text"] = "Remote Uplink: Down"
+        self.connectionr.configure(foreground="red")
 
     def __init__(self, master=None):
         Frame.__init__(self, master)
@@ -239,6 +328,7 @@ root.geometry("1280x720")
 root.attributes("-fullscreen", True)
 root.configure(background='#B8D7FD')
 app = Application(master=root)
+thread.start_new_thread(app.server, ())
 app.stop_recording() #start checking for connection
 app.mainloop()
 root.destroy()

@@ -7,11 +7,11 @@ import pyaudio
 CHUNK = 16
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
-RATE = 6000
+RATE = 12000
 WAVE_OUTPUT_FILENAME = "server_output.wav"
 WIDTH = 2
 
-HOST = 'localhost'     # Symbolic name meaning all available interfaces
+HOST = '192.168.42.2'     # Symbolic name meaning all available interfaces
 PORT = 12001              # Arbitrary non-privileged port
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
