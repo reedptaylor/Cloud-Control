@@ -18,6 +18,7 @@ connectionPackets = 0
 drone = False
 DOWNLINK_COUNT = 5
 connectionSocket = None
+tabletUplink = False
 
 def startRecording():
     global radio
@@ -132,6 +133,7 @@ class Application(Frame):
             connectionSocket, addr = serverSocket.accept()
             print("client connected @", addr, " ", connectionSocket)
             connectionSocket.send("04\0\n")
+            app.sendPacketCount()
             if (stopRecording):
                 connectionSocket.send("01\0\n")
             else:
@@ -163,6 +165,8 @@ class Application(Frame):
                 connectionSocket.send("021\0\n")
             else:
                 connectionSocket.send("020\0\n")
+            if not tabletUplink:
+                app.setRUp()
         except:
             connectionSocket = None
             app.setRDown()
@@ -171,6 +175,8 @@ class Application(Frame):
         global connectionSocket, failedPackets
         try:
             connectionSocket.send("03" + str(failedPackets) + "\0\n")
+            if not tabletUplink:
+                app.setRUp()
         except:
             connectionSocket = None
             app.setRDown()
@@ -274,10 +280,14 @@ class Application(Frame):
         self.sendDroneStatus()
 
     def setRUp(self):
+        global tabletUplink
+        tabletUplink = True
         self.connectionr["text"] = "Remote Uplink: Up"
         self.connectionr.configure(foreground="green")
 
     def setRDown(self):
+        global tabletUplink
+        tabletUplink = False
         self.connectionr["text"] = "Remote Uplink: Down"
         self.connectionr.configure(foreground="red")
 
