@@ -20,14 +20,31 @@ DOWNLINK_COUNT = 5
 connectionSocket = None
 tabletUplink = False
 
-def startRecording():
-    global radio
-    global failedPackets
-    global connectionPackets
-    global app
-    global connectionSocket
+def writeRadio(message):
+    global radio, failedPackets, connectionPackets
+    radio.stopListening()
+    result = radio.write(message) #time consuming
+    if not result:
+        # print("failed.")
+        failedPackets = failedPackets + 1
+        connectionPackets = connectionPackets + 1
+        app.setFailed()
+        if connectionPackets >= DOWNLINK_COUNT:
+            app.setDown()
+    else:
+        if (connectionPackets >= DOWNLINK_COUNT):
+            app.setUp()
+        connectionPackets = 0
 
-    payload = 1
+def tabletWrite(message):
+    for i in range(32):
+        if (not stopRecording):
+            writeRadio(message[2+i*32:34+i*32])
+        else:
+            return
+
+def startRecording():
+    global radio, connectionSocket
 
     CHUNK = 16
     FORMAT = pyaudio.paInt16
@@ -55,10 +72,6 @@ def startRecording():
         connectionSocket = None
 
     while(True):
-
-        # First, stop listening so we can talk.
-        radio.stopListening()
-
         if (not stopRecording):
             # Take the time, and send it.  This will block until complete
             try:
@@ -76,20 +89,8 @@ def startRecording():
             # hexData = ":".join("{:02x}".format(ord(c)) for c in (data))
             # print(hexData)
 
-            result = radio.write(data) #time consuming
-            if not result:
-                # print("failed.")
-                failedPackets = failedPackets + 1
-                connectionPackets = connectionPackets + 1
-                app.setFailed()
-                if connectionPackets >= DOWNLINK_COUNT:
-                    app.setDown()
-            else:
-                if (connectionPackets >= DOWNLINK_COUNT):
-                    app.setUp()
-                connectionPackets = 0
+            writeRadio(data)
 
-            payload += 1
         else:
             print("*_>done recording")
             stream.stop_stream()
@@ -98,10 +99,7 @@ def startRecording():
             return
 
 def notRecording():
-    global radio
-    global connectionPackets
-    global app
-    global connectionSocket
+    global radio, connectionPackets, app, connectionSocket
 
     try:
         connectionSocket.send("01\0\n")
@@ -133,27 +131,29 @@ class Application(Frame):
             connectionSocket, addr = serverSocket.accept()
             print("client connected @", addr, " ", connectionSocket)
             connectionSocket.send("04\0\n")
-            app.sendPacketCount()
-            if (stopRecording):
-                connectionSocket.send("01\0\n")
-            else:
-                connectionSocket.send("00\0\n")
             app.setRUp()
+            app.stop_recording()
+            app.sendPacketCount()
             app.sendDroneStatus()
             thread.start_new_thread(app.clientRecieve, (connectionSocket, addr))
 
     def clientRecieve(self, connectionSocket, addr):
+        global radio, failedPackets, connectionPackets
         while True:
-            clientMessage = connectionSocket.recv(1024)
-            app.setRUp()
+            clientMessage = connectionSocket.recv(2048)
             if (clientMessage[0:2] == "10"):
+                app.setRUp()
                 app.start_recording()
             elif (clientMessage[0:2] == "11"):
+                app.setRUp()
                 app.stop_recording()
             elif (clientMessage[0:2] == "15"):
-                break;
+                break
+            elif (clientMessage[0:2] == "16"):
+                if (tabletUplink and not stopRecording):
+                    thread.start_new_thread(tabletWrite, (clientMessage,))
             else:
-                break;
+                pass
         connectionSocket.close()
         connectionSocket = None
         app.setRDown()
@@ -182,12 +182,17 @@ class Application(Frame):
             app.setRDown()
 
     def start_recording(self):
-        global failedPackets
-        global stopRecording
+        global failedPackets, stopRecording, connectionSocket
         stopRecording = False
         failedPackets = 0
         self.failed["text"] = "Failed packets: " + str(failedPackets)
-        thread.start_new_thread(startRecording, ())
+        if (not tabletUplink):
+            thread.start_new_thread(startRecording, ())
+        else:
+            try:
+                connectionSocket.send("00\0\n")
+            except:
+                connectionSocket = None
         self.record["text"] = "Stop recording"
         self.record["image"] = self.square
         self.record["command"] = self.stop_recording

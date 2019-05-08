@@ -7,6 +7,7 @@ X1: stop recording
 03: failed packets
 04: tablet connected
 15: tablet disconnecting
+16: audio data
 first digit: 1 for tablet, 0 for drone
  */
 
@@ -17,6 +18,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
+import android.media.MediaRecorder;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
@@ -27,9 +29,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
     public static final int SERVER_PORT = 12001;
     private Socket socket = null;
     private DataInputStream dataIn;
-    private DataOutputStream dataOut;
     private Button recordingButton;
     private TextView gcsUplink;
     private TextView droneUplink;
@@ -101,10 +100,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void startRecording(Boolean tablet) {
         // Changes UI for recording and sends recording signal if originating from tablet
-        //TODO: implement using microphone
         try{
             if (tablet)
                 socket.getOutputStream().write("10".getBytes());
+            setFailedPackets("0");
             recording = true;
             recordingButton.post(new Runnable() {
                 @Override
@@ -113,6 +112,16 @@ public class MainActivity extends AppCompatActivity {
                     recordingButton.setCompoundDrawablesWithIntrinsicBounds(null, mContext.getResources().getDrawable(R.drawable.square), null, null);
                 }
             });
+            recorder = new AudioRecord(MediaRecorder.AudioSource.MIC,
+                    RECORDER_SAMPLERATE, RECORDER_CHANNELS,
+                    RECORDER_AUDIO_ENCODING, 1024);
+            recorder.startRecording();
+            recordingThread = new Thread(new Runnable() {
+                public void run() {
+                    sendAudio();
+                }
+            }, "AudioRecorder Thread");
+            recordingThread.start();
         }
         catch (IOException e) {}
     }
@@ -130,8 +139,44 @@ public class MainActivity extends AppCompatActivity {
                     recordingButton.setCompoundDrawablesWithIntrinsicBounds(null, mContext.getResources().getDrawable(R.drawable.circle), null, null);
                 }
             });
+            if (recorder != null) {
+                recorder.stop();
+                recorder.release();
+                recorder = null;
+                recordingThread = null;
+            }
         }
-        catch (IOException e) {}
+        catch (IOException | IllegalStateException e) {}
+        finally {
+            recording = false;
+        }
+    }
+
+    private byte[] shortAToByteA(short[] sData) {
+        int shortLen = sData.length;
+        byte[] bytes = new byte[shortLen * 2 + 2];
+        bytes[0] = "16".getBytes()[0];
+        bytes[1] = "16".getBytes()[1];
+        for (int i = 2; i < shortLen; i++) {
+            bytes[i * 2] = (byte)(sData[i] & 0x00FF);
+            bytes[(i * 2) + 1] = (byte)(sData[i] >> 8);
+            sData[i] = 0;
+        }
+        return bytes;
+    }
+
+    private void sendAudio() {
+        // Send audio to GCS from tablet MIC
+        while (recording) {
+            short sData[] = new short[512];
+            recorder.read(sData, 0, 512);
+            try {
+                byte bData[] = shortAToByteA(sData);
+                socket.getOutputStream().write(bData);
+            } catch (IOException | NullPointerException e) {
+                stopRecording(false);
+            }
+        }
     }
 
     private void setDroneUplink(final Boolean up) {
@@ -184,9 +229,11 @@ public class MainActivity extends AppCompatActivity {
             try {
                 dataIn = new DataInputStream(socket.getInputStream());
                 String serverMessage = dataIn.readLine();
+                setGcsUplink(true);
                 switch (serverMessage.substring(0,2)) {
                     case "00":
                         startRecording(false);
+                        Log.d("WIFI", "starting record");
                         break;
                     case "01":
                         stopRecording(false);
@@ -205,11 +252,16 @@ public class MainActivity extends AppCompatActivity {
                         setGcsUplink(true);
                         break;
                     default:
+                        Log.d("WIFI", "Got weird message. Going to close.");
                         throw new IOException();
                 }
             }
-            catch (Exception e) {
-                Log.d("WIFI", "couldn't receive packet");
+            catch (IllegalStateException e) {
+                Log.d("AUDIO", "release?", e);
+            }
+            catch (StringIndexOutOfBoundsException | NullPointerException | IOException e) {
+                //Disconnected from connection
+                Log.d("WIFI", "couldn't receive packet", e);
                 setGcsUplink(false);
                 setDroneUplink(false);
                 break;
