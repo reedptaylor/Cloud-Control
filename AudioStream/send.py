@@ -242,7 +242,7 @@ class Application(Frame):
         self.desciption.tag_add("center", "1.0", "end")
         self.desciption["height"] = 1
         self.desciption["width"] = 55
-        self.desciption.config(font=("Lato", 18), background='#B8D7FD', pady=100, padx=10, state=DISABLED,wrap=WORD, exportselection=0, relief=FLAT)
+        self.desciption.config(font=("Lato", 18), background='#B8D7FD', pady=85, padx=10, state=DISABLED,wrap=WORD, exportselection=0, relief=FLAT)
         self.desciption.grid(row=0,column=0, sticky=N+S+E+W)
 
         self.connectiond = Label(self)
