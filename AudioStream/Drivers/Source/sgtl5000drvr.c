@@ -1,11 +1,6 @@
 //
 //  sgtl5000drvr.c
 //  
-//
-//  Created by Anna Lee on 5/20/19.
-//
-//
-#include <unistd.h>
 
 #include "sgtl5000drvr.h"
 
