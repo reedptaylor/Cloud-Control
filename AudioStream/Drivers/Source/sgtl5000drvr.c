@@ -28,6 +28,13 @@ uint_16_t sgtl_ReadReg(uint_16 reg) {
     return 0;
 }
 
+void sgtl_ModifyReg(uint_16 reg, uint_16 clr_mask, uint_16 set_mask) {
+    uint_16 reg_val = 0;
+    reg_val &= clr_mask;
+    reg_val |= set_mask;
+    sgtl_WriteReg(reg, reg_val);
+}
+
 void sgtl_WriteReg(uint_16 reg, uint_16 reg_val) {
     uint8_t buffer[4];
     uint32 result;
