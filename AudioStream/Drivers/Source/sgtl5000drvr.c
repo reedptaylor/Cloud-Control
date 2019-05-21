@@ -15,9 +15,7 @@ void sgtl_WriteReg(uint_16 reg, uint_16 reg_val) {
     buffer[1] =	(uint_8)(reg & 0xFF);
     buffer[2] =	(uint_8)((reg_val >> 8) & 0xFF);
     buffer[3] =	(uint_8)(reg_val & 0xFF);
-    result = write(fd, buffer, 4);
-
-
+    //TODO write to result 
 }
 
 void InitCodec() {
