@@ -2,10 +2,30 @@
 //  sgtl5000drvr.c
 //  
 
+#include "i2c_17xx_40xx.h"
+#include "chip.h"
+#include "lpc_norflash.h"
+#include "lpc_nandflash.h"
+#include "lpc_nandflash_k9f1g.h"
 #include "sgtl5000drvr.h"
 
+// SGTL5000_I2C_BUS can either be BUS0 or BUS1, need to see how stuff is
+// hooked up on the pcb, this value must be defined
+// SGTL_I2C_ADDR = 0x0A
 void sgtl_Init(void) {
-    //TODO
+    //I2C_EVENTHANDLER_T old = Chip_I2C_GetMasterEventHandler(SGTL5000_I2C_BUS);
+    Chip_I2C_Init(SGTL5000_I2C_BUS);
+    Chip_I2C_SetClockRate(SGTL5000_I2C_BUS, 100000);
+    Chip_I2C_SetMasterEventHandler(SGTL5000_I2C_BUS, Chip_I2C_EventHandlerPolling);
+    //Chip_I2C_SetMasterEventHandler(SGTL5000_I2C_BUS, old);
+}
+
+uint_16_t sgtl_ReadReg(uint_16 reg) {
+    uint8_t rx_data[2];
+    if (Chip_I2C_MasterCmdRead(SGTL5000_I2C_BUS, SGTL_I2C_ADDR, reg, rx_data, 2) == 2) {
+        return (rx_data[0] << 8) | rx_data[1];
+    }
+    return 0;
 }
 
 void sgtl_WriteReg(uint_16 reg, uint_16 reg_val) {
@@ -15,7 +35,7 @@ void sgtl_WriteReg(uint_16 reg, uint_16 reg_val) {
     buffer[1] =	(uint_8)(reg & 0xFF);
     buffer[2] =	(uint_8)((reg_val >> 8) & 0xFF);
     buffer[3] =	(uint_8)(reg_val & 0xFF);
-    //TODO write to result 
+    Chip_I2C_MasterSend(SGTL5000_I2C_BUS, SGTL_I2C_ADDR, buffer, sizeof(buffer));
 }
 
 void InitCodec() {
