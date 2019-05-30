@@ -45,7 +45,7 @@
 int main(void)
 {
 	I2S_AUDIO_FORMAT_T audio_Confg;
-	audio_Confg.SampleRate = 6000; //half of sending speed
+	audio_Confg.SampleRate = 5512; //half of sending speed
 	/* Select audio data is 2 channels (1 is mono, 2 is stereo) */
 	audio_Confg.ChannelNumber = 1;
 	/* Select audio data is 16 bits */

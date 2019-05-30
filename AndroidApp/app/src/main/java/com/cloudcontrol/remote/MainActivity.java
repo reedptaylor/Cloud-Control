@@ -34,7 +34,8 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int RECORDER_SAMPLERATE = 12000;
+//    private static final int RECORDER_SAMPLERATE = 12000; Original rate
+    private static final int RECORDER_SAMPLERATE = 11025; //arduino compatible rate
     private static final int RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_MONO;
     private static final int RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
     private AudioRecord recorder = null;
