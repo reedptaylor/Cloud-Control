@@ -7,6 +7,7 @@ Communicating with groups of people during an emergency situation is an extremel
 ## Devices
 1. Raspberry Pi acts as the GCS. Sends data over NRF24 wireless module.
 2. LPC 4088 acts as reciever and is connected to drone. Recieves data over NRF24 wireless module.
+3. Android device can serve as remote to the GCS to control it and send audio (through a TCP connection to the GCS).
 
 
 ## Prerequisites
